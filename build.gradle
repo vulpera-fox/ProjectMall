@@ -34,6 +34,18 @@ dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
+	
+	// 타임리프를 뷰로 사용하기 위한 디펜던시
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	
+	// 유효성검사
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	
+	// 마이바티스 + 커넥터
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+	
+	// jdbc로그
+	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 }
 
 tasks.named('test') {
