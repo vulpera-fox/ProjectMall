@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ProductVO {
+
 	private int product_no;
 	private String product_name;
 	private int product_price;
@@ -21,6 +22,6 @@ public class ProductVO {
 	private LocalDateTime product_regdate;
 	private String image_no;
 	private String category_no;
-	
+
 	private String user_id;
 }
