@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>로그인성공</h3>
+	<h3 th:text="${session.vo.userName}+'님 안녕하세요'"></h3>
+	<h3 th:text="${session.vo.userId}"></h3>
+	<button id="logoutBtn">로그아웃</button>
+	<form action="modifyForm" method="post">
+		<input type="hidden" name="userId" th:value="${session.vo.userId}">
+		<input type="hidden" name="userName" th:value="${session.vo.userName}">
+		<input type="hidden" name="userPhone" th:value="${session.vo.userPhone}">
+		<input type="hidden" name="userAddress" th:value="${session.vo.userAddress}">
+		<button type="submit" id="modifyBtn">정보수정하기</button>
+	</form>
+	<form action="deleteForm" method="post">
+		<input type="hidden" name="userId" th:value="${session.vo.userId}">
+		<button type="submit">회원탈퇴</button>
+	</form>
+</body>
+
+<script th:inline="javascript">
+	var msg = '[[${msg}]]';
+	
+	if(msg.trim() != 'null') {
+		alert(msg);
+	}
+	
+</script>
+
+<script>
+	var logoutBtn = document.getElementById("logoutBtn");
+	logoutBtn.onclick = () => {
+    fetch('/logout', {
+        method: 'POST',
+    }).then(() => location.href = "login")
+	}
+	var modifyBtn = document.getElementById("modifyBtn");
+	modifyBtn.onclick =() => {
+		location.href = "modify"
+	}
+	
+</script>
+</html> 
