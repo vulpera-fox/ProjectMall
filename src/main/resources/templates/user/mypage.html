@@ -4,20 +4,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
 	<h3>로그인성공</h3>
-	<h3 th:text="${session.vo.userName}+'님 안녕하세요'"></h3>
-	<h3 th:text="${session.vo.userId}"></h3>
-	<button id="logoutBtn">로그아웃</button>
+	<h3 th:text="${session.userVO.userName}+'님 안녕하세요'"></h3>
+	<h3 th:text="${session.userVO.userId}"></h3>
+	<button id="logoutBtn"><a>로그아웃</a></button>
 	<form action="modifyForm" method="post">
-		<input type="hidden" name="userId" th:value="${session.vo.userId}">
-		<input type="hidden" name="userName" th:value="${session.vo.userName}">
-		<input type="hidden" name="userPhone" th:value="${session.vo.userPhone}">
-		<input type="hidden" name="userAddress" th:value="${session.vo.userAddress}">
+		<input type="hidden" name="userId" th:value="${session.userVO.userId}">
+		<input type="hidden" name="userName" th:value="${session.userVO.userName}">
+		<input type="hidden" name="userPhone" th:value="${session.userVO.userPhone}">
+		<input type="hidden" name="userAddress" th:value="${session.userVO.userAddress}">
 		<button type="submit" id="modifyBtn">정보수정하기</button>
 	</form>
 	<form action="deleteForm" method="post">
-		<input type="hidden" name="userId" th:value="${session.vo.userId}">
+		<input type="hidden" name="userId" th:value="${session.userVO.userId}">
 		<button type="submit">회원탈퇴</button>
 	</form>
 </body>
@@ -32,15 +33,18 @@
 </script>
 
 <script>
-	var logoutBtn = document.getElementById("logoutBtn");
+	//로그아웃	
+	$("#logoutBtn").click(function(){ 
+        $.ajax({
+            type:"POST",
+            url:"logout",
+            success:function(data){        
+                document.location.reload();     
+            } 
+        }); 
+    });
 	
-	logoutBtn.onclick = () => {
-    fetch('/logout', {
-        method: 'POST',
-    }).then(() => location.href = "login")
-	}
-	
-	
+		
 	var modifyBtn = document.getElementById("modifyBtn");
 	modifyBtn.onclick =() => {
 		location.href = "modify"
