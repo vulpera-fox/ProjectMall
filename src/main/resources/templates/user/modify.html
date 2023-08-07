@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+	<h3>정보수정 페이지</h3>
+	<form action="changeInfo" method="post">
+		<h3>아이디</h3>
+		<input type="text" id="userId" name="userId" th:value="${session.userVO.userId}" readonly>
+		<h3>비밀번호</h3>	
+		<input type="text" id="userPw" name="userPw">
+		<span id="pwmessage"></span>
+		<h3>이름</h3>
+		<input type="text" name="userName" th:value="${session.userVO.userName}" readonly>
+		<h3>휴대폰번호</h3>
+		<input type="text" name="userPhone" th:value="${session.userVO.userPhone}" pattern="\d{11}">
+		<h3>주소</h3>
+		<input type="text" name="userAddress" th:value="${session.userVO.userAddress}"><br/>
+		<button type="submit">회원 정보 변경</button>
+	</form>
+</body>
+
+<script>
+	//비밀번호 일치 확인 메서드
+	//비밀번호 일치 확인 메서드
+	$("#userPw").on("blur", function() {
+		var inputedPw = $(this).val();
+		var userId = $('#userId').val();
+		
+		$.ajax({
+			url : "passwordCheck",
+			type: "post",
+			data: JSON.stringify({ userId: userId, userPw: inputedPw }),
+			dataType: "json",
+			contentType: "application/json; charset=UTF-8",
+			success : function(data) {
+				if(data.check == 1) {
+					$('#userPw').css("background-color", "#FFCECE");
+					$('#pwmessage').css("color", "red");
+					$('#pwmessage').text("기존 비밀번호와 동일합니다.");
+					$("button[type='submit']").removeAttr("disabled");
+				} else if(data.check == 0) {
+					$('#userPw').css("background-color", "#B0F6AC");
+					$('#pwmessage').css("color", "green");
+					$('#pwmessage').text("사용가능한 비밀번호입니다.");
+					$("button[type='submit']").attr("disabled", true);
+				}
+			}
+		});
+	});
+</script>
+</html>

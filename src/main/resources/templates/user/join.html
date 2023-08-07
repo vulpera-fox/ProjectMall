@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    width: 400px;
+}
+
+h3 {
+    margin-bottom: 10px;
+}
+
+input[type="text"], input[type="password"] {
+    margin-bottom: 20px;
+    padding: 12px;
+    width: 90%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #009879;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #007b66;
+}
+
+
+</style>
+</head>
+<body>
+    <form action="joinForm" method="post">
+    	<h3>회원가입 페이지</h3>
+        <h3>아이디</h3>
+        <input type="text" placeholder="아이디를 입력하세요" id="userId" name="userId" th:value="${vo != null ? vo.userId : ''}">
+        <span th:text="${valid_userId}"></span>
+        <button type="button" id="idCheck" onclick="checkId()">아이디 중복확인</button><br/>
+        <span id="olmessage"></span>
+        <h3>비밀번호</h3>
+        <input type="password" placeholder="비밀번호를 입력하세요" name="userPw" th:value="${vo != null ? vo.userPw : ''}"><br/>
+        <span th:text="${valid_userPw}"></span>
+        <h3>이름</h3>
+        <input type="text" placeholder="이름을 입력하세요" name="userName" th:value="${vo != null ? vo.userName : ''}"><br/>
+        <span th:text="${valid_userName}"></span>
+        <h3>휴대폰번호</h3>
+        <input type="text" placeholder="휴대폰 번호를 입력하세요" name="userPhone" title="숫자만 입력하세요" pattern="\d{11}" th:value="${vo != null ? vo.userPhone : ''}"><br/>
+        <span th:text="${valid_userPhone}"></span>
+        <h3>집주소</h3>
+        <input type="text" placeholder="주소를 입력하세요" name="userAddress" th:value="${vo != null ? vo.userAddress : ''}"><br/>    
+        <span th:text="${valid_userAddress}"></span>
+        <input type="radio" value="소비자" name="userGrade" checked>
+        <span>소비자</span>
+        <input type="radio" value="관리자" name="userGrade">
+        <span>판매자</span>
+        <button type="submit">회원가입 하기</button>
+    </form>
+</body>
+
+
+
+<script>
+	//아이디 중복확인 메서드
+	function checkId() {
+		var inputed = $('#userId').val();
+		console.log(inputed);
+		
+		$.ajax({
+			url : "idCheck",
+			type: "post",
+			data: JSON.stringify({ userId: inputed }),
+			dataType: "json",
+			contentType: "application/json; charset=UTF-8",
+			success : function(data) {
+				if(data.check > 0) {
+					$('#userId').css("background-color", "#FFCECE");
+					$('#olmessage').css("color", "red");
+					$('#olmessage').text("이미 사용 중인 아이디입니다.");
+					$("button[type='submit']").attr("disabled", true);
+				} else if(data.check == 0) {
+					$('#userId').css("background-color", "#B0F6AC");
+					$('#olmessage').css("color", "green");
+					$('#olmessage').text("사용 가능한 아이디입니다.");
+					$("button[type='submit']").removeAttr("disabled");
+				}
+			}
+		});
+	};
+</script>
+</html>
