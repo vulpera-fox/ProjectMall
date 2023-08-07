@@ -25,7 +25,6 @@
 
 <script>
 	//비밀번호 일치 확인 메서드
-	//비밀번호 일치 확인 메서드
 	$("#userPw").on("blur", function() {
 		var inputedPw = $(this).val();
 		var userId = $('#userId').val();
@@ -41,12 +40,12 @@
 					$('#userPw').css("background-color", "#FFCECE");
 					$('#pwmessage').css("color", "red");
 					$('#pwmessage').text("기존 비밀번호와 동일합니다.");
-					$("button[type='submit']").removeAttr("disabled");
+					$("button[type='submit']").attr("disabled", true); //기존 비밀번호와 동일하면 제출 버튼 비활성화
 				} else if(data.check == 0) {
 					$('#userPw').css("background-color", "#B0F6AC");
 					$('#pwmessage').css("color", "green");
 					$('#pwmessage').text("사용가능한 비밀번호입니다.");
-					$("button[type='submit']").attr("disabled", true);
+					$("button[type='submit']").removeAttr("disabled"); //새로운 비밀번호면 제출 버튼 활성화
 				}
 			}
 		});

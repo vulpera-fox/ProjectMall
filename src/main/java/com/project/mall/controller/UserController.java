@@ -58,13 +58,12 @@ public class UserController {
 			ra.addFlashAttribute("msg", "아이디와 비밀번호를 확인하세요");
 			return "redirect:/user/login";
 		}
+		
+		session.setAttribute("vo",vo);	
 		//등급 정보가져와서 관리자면 관리자페이지 이동 추후에 다시 경로 설정  
-		if(vo.getUserGrade().equals("관리자")) {
-			
-			session.setAttribute("vo",vo);		
+		if(vo.getUserGrade().equals("관리자")) {		
 			return "user/mypage";
 		}else {	
-			session.setAttribute("vo", vo);
 			return "redirect:/user/mypage";
 		}
 	}
@@ -197,22 +196,26 @@ public class UserController {
 		
 		return "user/findpw";
 	}
+	@GetMapping("/findpw_ok")
+	public String findpw_ok() {
+		return "user/findpw_ok";
+	}
 	//비밀번호 찾기
 	@PostMapping("/findPwForm")
 	public String findPwForm(@RequestParam("userId") String userId, @RequestParam("userName") String userName, @RequestParam("userPhone") String userPhone,Model model, RedirectAttributes ra) {
-		String userPw = userService.pwFind(userId, userName, userPhone);
-		try {
-			if(userPw.equals(" ")) {
-			}
-		} catch (Exception e) {
-			ra.addFlashAttribute("msg","등록된 정보가 없습니다.");
-			return "redirect:/user/findpw";
-		}
-		model.addAttribute("userId",userId);
-		model.addAttribute("userPw",userPw );
-		model.addAttribute("userName",userName);
-		System.out.println(userId);
-		return "user/findpw_ok";
+	    String userPw = userService.pwFind(userId, userName, userPhone);
+	    try {
+	        if(userPw.equals(" ")) {
+	        }
+	    } catch (Exception e) {
+	        ra.addFlashAttribute("msg","등록된 정보가 없습니다.");
+	        return "redirect:/user/findpw";
+	    }
+	    ra.addFlashAttribute("userId",userId);
+	    ra.addFlashAttribute("userPw",userPw );
+	    ra.addFlashAttribute("userName",userName);
+	    System.out.println(userId);
+	    return "redirect:/user/findpw_ok";
 	}
 	//비밀번호 재설정
 	@PostMapping("/changePwForm")
@@ -229,9 +232,9 @@ public class UserController {
 	//로그아웃하고 세션삭제
 	@PostMapping("/logout")
 	public String logout(HttpSession session) {
-	    
+	    session.removeAttribute("vo");
 	    session.invalidate();
-	    return "user/login";
+	    return "redirect/user/login";
 	}
 	
 	//회원탈퇴

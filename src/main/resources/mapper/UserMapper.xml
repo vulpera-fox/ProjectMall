@@ -28,7 +28,15 @@
   	</select>
   	<!-- 비밀번호 재설정 -->
   	<update id="updatePw" parameterType="com.project.mall.command.UserVO">
-	  	update user
+	  	update user set userPw = #{userPw} where userId = #{userId} 
+  	</update>
+  	<!-- 회원탈퇴 -->
+  	<delete id="deleteUser" parameterType="com.project.mall.command.UserVO">
+  		delete from user where userId = #{userId}
+  	</delete>
+  	<!-- 회원 정보 수정 -->
+  	<update id="updateInfo" parameterType="com.project.mall.command.UserVO">
+  		update user
 	    <set>
 	    <if test="userPw != null and userPw != ''">
 	    userPw = #{userPw},
@@ -37,14 +45,6 @@
 	    userAddress = #{userAddress}
 	    </set>
 	    where userId = #{userId}
-  	</update>
-  	<!-- 회원탈퇴 -->
-  	<delete id="deleteUser" parameterType="com.project.mall.command.UserVO">
-  		delete from user where userId = #{userId}
-  	</delete>
-  	<!-- 회원 정보 수정 -->
-  	<update id="updateInfo" parameterType="com.project.mall.command.UserVO">
-  		update user set userPw = #{userPw} , userPhone = #{userPhone} , userAddress = #{userAddress} where  userId = #{userId}
   	</update>
   	<!-- 기존 비밀번호와 동일한지 비교 -->
   	<select id="passwordCheck" resultType="int" parameterType="String">

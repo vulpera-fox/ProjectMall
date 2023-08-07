@@ -33,11 +33,14 @@
 
 <script>
 	var logoutBtn = document.getElementById("logoutBtn");
+	
 	logoutBtn.onclick = () => {
     fetch('/logout', {
         method: 'POST',
     }).then(() => location.href = "login")
 	}
+	
+	
 	var modifyBtn = document.getElementById("modifyBtn");
 	modifyBtn.onclick =() => {
 		location.href = "modify"
