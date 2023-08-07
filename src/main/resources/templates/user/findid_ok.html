@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+.findOk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}	
+</style>
+<body>
+	<div class="findOk">
+		<h3>아이디찾기 성공</h3>
+		<h3>[[${userName}]]님의 아이디는</h3><br/>
+		<h3>[[${userId}]]입니다</h3>
+		<a style="text-decoration: none;" href="login">로그인</a> <a style="text-decoration: none;" href="findpw">비밀번호 찾기</a>
+	</div>
+</body>
+<script>
+	consolog.log()
+</script>
+</html>

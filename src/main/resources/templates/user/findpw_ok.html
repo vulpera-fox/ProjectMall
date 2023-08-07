@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+.findOk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1;
+  padding-top: 100px; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+</style>
+<body>
+	<div class="findOk">
+		<h3>비밀번호찾기 성공</h3>
+		<input type="hidden" id="checkId" th:value="${userId}">
+		<h3>[[${userName}]]님의 비밀번호는</h3><br/>
+		 <h3>[[${userPw}]]입니다</h3>
+		 <button id="findPwBtn">비밀번호 재설정</button>
+		 <a style="text-decoration: none;" href="login">로그인</a> 	
+	</div>
+<div class="modal" id="myModal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>비밀번호 재설정</h2>
+    <form action="changePwForm" method="post">
+	  <input type="hidden" id="userId" name="userId" th:value="${userId}"><br/>	
+      <label for="newPw">새로운 비밀번호</label><br>
+      <input type="password" id="newPw" name="userPw"><br>
+      <label for="confirmPw">비밀번호 확인</label><br>
+      <input type="password" id="confirmPw" name="userPwCheck"><br>
+      <input type="submit" value="비밀번호 변경">
+    </form>
+  </div>
+</div>	
+
+</body>
+<script>
+	var findPwBtn = document.getElementById("findPwBtn");
+	
+	var modal = document.getElementById("myModal");
+	var btn = document.getElementById("findPwBtn");
+	var span = document.getElementsByClassName("close")[0];
+	
+	
+	btn.onclick = function() {
+	  modal.style.display = "block";
+	}
+	
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
+	
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
+	document.querySelector("#myModal form").addEventListener("submit", function(e) {
+    var newPw = document.getElementById("newPw").value;
+    var confirmPw = document.getElementById("confirmPw").value;
+
+    if (newPw !== confirmPw) {
+        alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+        e.preventDefault();
+    }
+});
+	
+</script>
+</html>

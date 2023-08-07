@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<style>
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.loginForm input[type="text"],
+.loginForm input[type="password"],
+.loginForm button {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 222px;
+  border-radius: 5px;
+}
+.loginForm >.loginBtn{
+	height: 49px;
+}
+
+.loginForm button {
+  background-color: #008CBA; 
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.title{
+	align-self: flex-start;
+}
+.title h3{
+	text-align: left;
+}
+
+.loginForm .links {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.loginForm .links a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #008CBA;
+  
+}
+.loginInfo a{
+	font-size: 12px;
+	text-decoration: none;
+	color: black;
+	
+}
+
+.userType {
+  display: flex;
+  justify-content: flex-start;  
+  width: 200px;
+  margin-bottom: 10px;
+  
+}
+.userType {
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+.userType div {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.userType span {
+  margin-left: 5px;
+}
+</style>
+<body>
+	<header>헤더</header>
+	<form class="loginForm" action="loginForm" method="post">
+		<div class="title">
+			<h3 style="text-align: left;">옷가게</h3>			
+		</div>
+		<div class="userType">
+			<div>
+				<input type="radio" name="userGrade" value="소비자" checked>
+				<span>소비자</span>
+			</div>
+			<div>
+				<input type="radio" name="userGrade" value="관리자">
+				<span>판매자</span>
+			</div>
+		</div>
+		<input type="text" name="userId" placeholder="아이디"/>
+		<input type="password" name="userPw" placeholder="비밀번호"/>
+		<button type="submit" class="loginBtn">로그인</button>
+	<div class="loginInfo">
+		<a href="findid">아이디 찾기</a>
+		<a href="findpw">비밀번호 찾기</a>
+		<a href="join">회원가입</a>
+	</div>
+	<div id="kakao-login-btn"></div>
+	</form>
+	
+	<footer>푸터</footer>
+</body>
+
+<script th:inline="javascript">
+	var msg = '[[${msg}]]';
+	
+	if(msg.trim() != 'null') {
+		alert(msg);
+	}
+</script>
+
+<script>
+    // SDK가 모두 로드된 후 실행되는 함수를 만듭니다.
+    window.onload = function () {
+      // 카카오를 초기화합니다. 이 때 클라이언트 ID를 사용해야 합니다.
+      Kakao.init('8ed12cc911843f74abd1640387211896'); // 본인의 클라이언트 ID로 바꿔주세요
+
+      // 로그인 버튼을 만듭니다.
+      Kakao.Auth.createLoginButton({
+        container: '#kakao-login-btn',
+        success: function(authObj) {
+          window.location.href = "/user/mypage";
+        },
+        fail: function(err) {
+          alert(JSON.stringify(err));
+        }
+      });
+    };
+  </script>
+</html>
