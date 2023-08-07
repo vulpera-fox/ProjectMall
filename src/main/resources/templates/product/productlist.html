@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>상품 리스트</h1>
+
+    <!-- 검색 폼 -->
+    <form action="#" method="get">
+        <input type="text" name="searchName" placeholder="이름 검색">
+        <input type="submit" value="검색">
+    </form>
+
+    <!-- 상품 목록 -->
+    <table>
+        <tr>
+            <th>제품번호</th>
+            <th>이름</th>
+            <th>가격</th>
+            <th>재고(안보임)</th>
+            <th>설명</th>
+            <th>판매한개수(안보임)</th>
+            <th>등록일</th>
+            <th>이미지(이미지넘버)</th>
+            <th>카테고리</th>
+            <th>등록자아이디</th>
+        </tr>
+        <!-- 아래 행들은 서버에서 동적으로 생성해야 합니다 -->
+        <tr th:each="vo, status : ${list}">
+            <td>[[${vo.product_no}]]</td>
+            <td>
+				<a title="상세보기(클릭)" th:href="@{/order/order(product_no=${vo.product_no})}">
+					[[${vo.product_name}]]		
+				</a>
+			</td>
+            <td>[[${vo.product_price}]]</td>
+            <td>[[${vo.product_stock}]]</td>
+            <td>[[${vo.product_description}]]</td>
+            <td>[[${vo.product_soldcount}]]</td>
+            <td th:text="${#temporals.format(vo.product_regdate, 'y년M월d일  HH시m분s초')}"></td>
+            <td><img src="#"></td>
+            <td>카테고리</td>
+            <td>등록자아이디</td>
+            <td><button>장바구니</button></td>
+            <td><button>바로구매</button></td>
+        </tr>
+        
+        <!-- Add more products as needed -->
+    </table>
+</body>
+</html>

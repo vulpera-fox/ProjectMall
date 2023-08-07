@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import com.project.mall.command.ProductVO;
 
 public interface ProductService {
-	
-	public ArrayList<ProductVO> getList();
+
+	public ArrayList<ProductVO> getList(String searchName);
+	public ArrayList<ProductVO> kewordSerach();
 
 }

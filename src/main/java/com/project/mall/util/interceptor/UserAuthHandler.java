@@ -19,7 +19,7 @@ public class UserAuthHandler implements HandlerInterceptor{
 		System.out.println("작동함");
 		HttpSession session = request.getSession();
 		
-		if (session.getAttribute("vo") == null) {
+		if (session.getAttribute("userVO") == null) {
 	        response.sendRedirect(request.getContextPath() + "/user/login");
 	        return false;
 	    }
