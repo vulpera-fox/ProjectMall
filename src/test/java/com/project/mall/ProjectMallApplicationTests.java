@@ -8,6 +8,7 @@ class ProjectMallApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
 	}
 
 }
