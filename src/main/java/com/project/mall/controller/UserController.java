@@ -48,23 +48,24 @@ public class UserController {
 	@PostMapping("/loginForm")
 	public String loginForm(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw,@RequestParam("userGrade") String userGrade , RedirectAttributes ra, Model model, HttpSession session) {
 		//아이디 비번 등급 정보로 login 실행
-		UserVO vo =userService.login(userId, userPw, userGrade);
+		UserVO userVO =userService.login(userId, userPw, userGrade);
 		
 		try {	
 			// 아이디 비밀번호 잘못입력 했을때 nullpointexception 발생해서 try catch
-			if(vo.getUserId() == null) {
+			if(userVO.getUserId() == null) {
 			}
 		} catch (Exception e) {
 			ra.addFlashAttribute("msg", "아이디와 비밀번호를 확인하세요");
 			return "redirect:/user/login";
 		}
 		
-		session.setAttribute("vo",vo);	
+		session.setAttribute("userVO",userVO);	
 		//등급 정보가져와서 관리자면 관리자페이지 이동 추후에 다시 경로 설정  
-		if(vo.getUserGrade().equals("관리자")) {		
+		if(userVO.getUserGrade().equals("관리자")) {		
 			return "user/mypage";
 		}else {	
-			return "redirect:/user/mypage";
+//			return "redirect:/user/mypage";
+			return "redirect:/product/productlist";
 		}
 	}
 	//마이페이지
@@ -197,13 +198,14 @@ public class UserController {
 		return "user/findpw";
 	}
 	@GetMapping("/findpw_ok")
-	public String findpw_ok() {
+	public String findpw_ok(Model model, @ModelAttribute("userId") String userId, @ModelAttribute("userPw") String userPw, @ModelAttribute("userName") String userName) {
 		return "user/findpw_ok";
 	}
 	//비밀번호 찾기
 	@PostMapping("/findPwForm")
 	public String findPwForm(@RequestParam("userId") String userId, @RequestParam("userName") String userName, @RequestParam("userPhone") String userPhone,Model model, RedirectAttributes ra) {
 	    String userPw = userService.pwFind(userId, userName, userPhone);
+	    System.out.println(userPw);
 	    try {
 	        if(userPw.equals(" ")) {
 	        }
@@ -211,10 +213,13 @@ public class UserController {
 	        ra.addFlashAttribute("msg","등록된 정보가 없습니다.");
 	        return "redirect:/user/findpw";
 	    }
+	    
 	    ra.addFlashAttribute("userId",userId);
 	    ra.addFlashAttribute("userPw",userPw );
 	    ra.addFlashAttribute("userName",userName);
 	    System.out.println(userId);
+	    System.out.println(userPhone);
+	    System.out.println(userName);
 	    return "redirect:/user/findpw_ok";
 	}
 	//비밀번호 재설정
