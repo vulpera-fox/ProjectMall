@@ -76,7 +76,7 @@ input[type=text], select{min-width:60px;}
 
 /* 테이블 */
 .collum_tit{background-color:#263238; position:relative;line-height:55px; border:1px solid #ededed; min-width:950px;}
-.collum_tit h2{color:#fff;font-size:18px;  line-height:55px; margin-left: 20px;}
+.collum_tit span{color:solid #ededed;; font-size:18px;  line-height:55px; margin-left: 20px;}
 .row_tb_4{border-top:1px solid #4588fd; border-bottom:1px solid #ededed; border-right:1px solid #ededed;}
 .row_tb_4 tr th{background-color:#edf0f5; height:40px; line-height:40px; font-size:14px; color:#555555; text-align:center; width:25%; border-left:1px solid #fff; font-weight:bold;}
 .row_tb_4 tr td{background-color:#fff; height:40px; line-height:40px; font-size:14px; color:#555555; text-align:center; width:25%; border-left:1px solid #ededed;}

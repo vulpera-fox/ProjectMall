@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.mall.command.ProductVO;
+import com.project.mall.util.page.Criteria;
 
 @Service("productService")
 public class ProductServiceImp1 implements ProductService {
@@ -14,15 +15,20 @@ public class ProductServiceImp1 implements ProductService {
 	private ProductMapper productMapper;
 	
 	@Override
-	public ArrayList<ProductVO> getList(String searchName) {
+	public ArrayList<ProductVO> getList(String searchName, Criteria cri) {
 		
-		return productMapper.getList(searchName);
+		return productMapper.getList(searchName, cri);
 	}
 
 	@Override
 	public ArrayList<ProductVO> kewordSerach() {
 		
 		return productMapper.kewordSerach();
+	}
+
+	@Override
+	public int getTotal(Criteria cri) {
+		return productMapper.getTotal(cri);
 	}
 
 }

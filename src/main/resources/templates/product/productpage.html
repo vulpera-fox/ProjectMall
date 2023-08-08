@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:replace="~{/layout/layout :: setContent( ~{:: .wrap})}">
-<body>
 
 
 
@@ -16,17 +15,20 @@
 				<div class="midiaq">
 					<div class="page_title">TI</div>
 
-					<form name="###########" action="############" method="get" >
+					<form name="searchForm" action="productpage" method="get" >
+					
+					<input type="hidden" name="page" value="1">	
+					<input type="hidden" name="amount" th:value="${pageVO.amount}">	
 					<div class="search_block flfull">
 
 						<div class="fl">
 							<div>
 								<span class="search_th">상품이름 검색</span>
-								<input type="text" class="" placeholder="상품 검색">
+								<input type="text" class="" placeholder="상품 검색" name="searchName" th:value="${pageVO.cri.searchName}">
 							</div>
 							
 							<!--<div>
-								<span class="search_th">상품내용 검색</span>
+								<span class="search_th"> 검색</span>
 								<input type="text" class="" placeholder="상품 검색">
 							</div>-->
 							
@@ -45,24 +47,31 @@
 
 						<div class="fr">
 							<div class="search_btn_area">
-								<a href="#" class="normal_btn purplebtn">검색</a>
+								<a href="#" class="normal_btn purplebtn" id="searchBtn">검색</a>
 							</div>
 						</div>
 					</div>
 
 					<div class="full_collum collum">
 						<ul>
+							<!--	<li>
+								<a href="#"></a>
+								<a href="#"><span>신상품 순</span></a>
+								<a href="#"><span>낮은가격 순</span></a>
+								<a href="#"><span>높은가격 순</span></a>
+							</li>-->
 							<li class="collum_tit">
-								<span>판매량 순</span>
-								<span>최신 등록순</span>
-								<span>가격 낮은순</span>
-								<span>가격 높은순</span>
-
-								<select class="">
-									<option value="20">20개 보기</option>
-									<option value="30">30개 보기</option>
-									<option value="40">40개 보기</option>
-									<option value="50">50개 보기</option>
+								<span><a href="#" th:style="${'color:white'}" name="searchSold" th:value="${pageVO.cri.searchSold}">판매량 순</a></span>
+								<span><a href="#" th:style="${'color:white'}" name="searchNewItem" th:value="${pageVO.cri.searchNewItem}">신상품 순</a></span>
+								<span><a href="#" th:style="${'color:white'}" name="searchRowPrice" th:value="${pageVO.cri.searchRowPrice}">낮은가격 순</a></span>
+								<span><a href="#" th:style="${'color:white'}" name="searchHighPrice" th:value="${pageVO.cri.searchHighPrice}">높은가격 순</a></span>
+								
+								
+								<select class="" onchange="handleChange()">
+									<option value="20" th:selected="${pageVO.amount == 20}">20개 보기</option>
+									<option value="30" th:selected="${pageVO.amount == 30}">30개 보기</option>
+									<option value="40" th:selected="${pageVO.amount == 40}">40개 보기</option>
+									<option value="50" th:selected="${pageVO.amount == 50}">50개 보기</option>
 								</select>
 								<span class="showtoggle minus"></span>
 								<ul>
@@ -70,43 +79,18 @@
 										<div class="showproduct">
 											
 											<ul class="imagelist">
-												<li>
+												<li th:each="vo, status : ${list}">
 													<img src="/img/1.jpg">
-													<p>이름</p>
-													<p>가격</p>
+													<p>[[${vo.product_name}]]</p>
+													<p>[[${vo.product_price}]]</p>
+													<p>[[${vo.product_soldcount}]]</p>
+													<input type="hidden" th:value="${vo.product_no}">
 												</li>
-												<li><img src="/img/2.jpg">이미지</li>
-												<li><img src="/img/3.jpg">이미지2</li>
-												<li><img src="/img/4.jpg">이미지3</li>
-												<li><img src="/img/5.jpg">이미지4</li>
-											</ul>
-											<ul class="imagelist">
-												<li><img src="#">이미지1</li>
-												<li><img src="#">이미지1</li>
-												<li><img src="#">이미지1</li>
-												<li><img src="#">이미지1</li>
-												<li><img src="#">이미지1</li>
-											</ul>
-											<ul class="imagelist">
-												<li><img src="#">이미지1</li>
-												<li><img src="#">이미지1</li>
-												<li><img src="#">이미지1</li>
-												<li><img src="#">이미지1</li>
-												<li><img src="#">이미지1</li>
-											</ul>
-											<ul class="imagelist">
-												<li><img src="#">이미지1</li>
-												<li><img src="#">이미지1</li>
-												<li><img src="#">이미지1</li>
-												<li><img src="#">이미지1</li>
-												<li><img src="#">이미지1</li>
-											</ul>
-							
-																				
+											</ul>						
 										</div>
 
 
-										<div class="page">
+								<!--		<div class="page">
 											<ul>
 												<li><a href="#"><i class="fa fa-angle-double-left"
 															aria-hidden="true"></i></a></li>
@@ -122,7 +106,10 @@
 												<li><a href="#"><i class="fa fa-angle-double-right"
 															aria-hidden="true"></i></a></li>
 											</ul>
-										</div>
+										</div>-->
+										
+										<th:block th:replace="~{./layout/page :: pageNation( ${pageVO})}"></th:block>
+										
 									</li>
 
 								</ul>
@@ -138,10 +125,23 @@
 			</div>
 		</div>
 	</div><!-- end wrap -->
+</th:block>	
+
+
+<script th:inline="javascript">
 	
-
-
-
-</body>
+	function handleChange() {
+		document.searchForm.amount.value = event.target.value;
+		document.searchForm.submit();
+	}
+	
+	var searchBtn = document.getElementById("searchBtn");
+	searchBtn.onclick = function() {
+		
+		event.preventDefault(); //a 중지
+		document.searchForm.submit();
+	}
+	
+</script>
 
 </html>
