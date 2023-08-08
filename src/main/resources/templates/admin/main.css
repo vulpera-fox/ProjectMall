@@ -1,0 +1,49 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+ul, li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+
+.contentArea {
+  height: 500px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.upperArea {
+  overflow: hidden;
+  margin-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+
+.infoArea {
+  float: left;
+}
+
+.myArea {
+  float: right;
+}
+
+.productArea {
+  height: 100px;
+}
+
+.productContainer {
+
+}
+
+.productContainer ul {
+  display: inline-block;
+  width: 20%;
+  border: 1px solid black;
+}

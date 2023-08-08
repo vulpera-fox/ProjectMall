@@ -1,0 +1,120 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+li, ul {
+  list-style: none;
+}
+
+#container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.topArea {
+  overflow: hidden;
+}
+
+.titleArea {
+  overflow: hidden;
+  border-bottom: 1px solid black;
+  height: 100px;
+  line-height: 100px;
+}
+
+.titleLeft {
+  float: left;
+  width: 30%;
+  border-right: 1px sol black;
+}
+
+.titleRight {
+  float: right;
+  width: 70%;
+}
+
+.titleRight input {
+  width: 60%;
+}
+
+.imageArea {
+  overflow: hidden;
+  border-bottom: 1px solid black;
+  height: 200px;
+  line-height: 200px;
+}
+
+.imageLeft {
+  float: left;
+  width: 30%;
+}
+
+.imageRight {
+  float: right;
+  width: 70%;
+}
+
+.imageRight img {
+  width: 100px;
+  height: 80px;
+}
+
+.infoArea {
+  border-bottom: 1px solid black;
+  
+  padding: 10px 0;
+}
+
+.infoTable {
+  width: 100%;
+}
+
+
+.infoTable tr td {
+  width: 33%;
+}
+
+.infoTable tr td input {
+  width: 100%;
+}
+
+.descriptionArea {
+  overflow: hidden;
+  height: 200px;
+  line-height: 200px;
+  padding: 10px 0;
+}
+
+.descriptionLeft {
+  float: left;
+  width: 30%;
+}
+
+.descriptionRight {
+  float: right;
+  width: 70%;
+}
+
+.descriptionRight input {
+  width: 100%;
+}
+
+.lowArea {
+	margin-top: 20px;
+}
+
+.btn {
+	 background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
