@@ -15,9 +15,9 @@ public class ProductServiceImp1 implements ProductService {
 	private ProductMapper productMapper;
 	
 	@Override
-	public ArrayList<ProductVO> getList(String searchName, Criteria cri) {
+	public ArrayList<ProductVO> getList() {
 		
-		return productMapper.getList(searchName, cri);
+		return productMapper.getList();
 	}
 
 	@Override

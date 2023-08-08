@@ -11,8 +11,7 @@ import com.project.mall.util.page.Criteria;
 
 @Mapper
 public interface ProductMapper {
-	public ArrayList<ProductVO> getList(@Param("searchName") String searchName,
-										@Param("cri") Criteria cri);
+	public ArrayList<ProductVO> getList();
 	public ArrayList<ProductVO> kewordSerach();
 	public int getTotal(Criteria cri);
 }

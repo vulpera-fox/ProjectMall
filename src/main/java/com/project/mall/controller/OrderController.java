@@ -42,7 +42,7 @@ public class OrderController {
 			ra.addFlashAttribute("msg","주문이 완료되었습니다");
 		}
 		System.out.println(vo.toString());
-		return "redirect:/product/productlist";
+		return "redirect:/product/productpage";
 	}
 	
 	//주문내역

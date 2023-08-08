@@ -23,7 +23,9 @@
 		               ORDER BY CATEGORY_NAV ASC
 		            ) CATEGORY_LEFT
 		  ON CATEGORY_LEFT.CATEGORY_KEY = P.CATEGORY_NO
-		  
+		  order by product_no asc
+		  limit 0, 20
+		 <!-- 
   		<if test="cri.searchName != '' and cri.searchName != null">
   		and product_name like concat('%',#{cri.searchName},'%')
   		</if>
@@ -36,23 +38,23 @@
   		<![CDATA[and product_price <= #{cri.searchHighPrice}]]>	
   		</if>
   		
-  		order by
-  		<!-- 낮은 가격순  -->
+  		
+  		
   		<if test="cri.searchPrice == 'asc'">
   			prod_price asc,
   		</if>
   		
-  		<!-- 높은 가격순  -->
+  		
   		<if test="cri.searchPrice == 'desc'">
   			prod_price desc,
   		</if>
   		
-  		<!-- 판매량 순 -->
+  		
   		<if test="cri.searchSold == 'desc'">
   			prod_soldCount desc,
   		</if>
   		
-  		<!-- 신상품 순  -->
+  		
   		<if test="cri.searchNewItem == 'desc'">
   			prod_regdate desc,
   		</if>
@@ -60,6 +62,7 @@
   		
   		product_no asc
   		limit #{cri.pageStart}, #{cri.amount}
+  		-->
   	</select>
   	
   	
