@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.project.mall.order.service.OrderMapper">
+  	<select id="productInfo" resultType="com.project.mall.command.ProductVO">
+  		select * from product where product_no = #{product_no}
+  	</select>
+  	<!-- 단일구매 기능 -->
+  	<insert id="insertOrderList" parameterType="com.project.mall.command.OrderVO">
+  		insert into productorder(
+  							 product_no, user_id, boxnumber, category_id, paymentmethod, ordername, orderaddress, orderphone, orderdetailaddress, ordermemo , product_name, pay_price
+  							)
+  					values(
+  							 #{product_no}, #{user_id}, #{boxnumber} , #{category_id}, #{paymentmethod}, #{ordername}, #{orderaddress}, #{orderphone}, #{orderdetailaddress}, #{ordermemo}, #{product_name}, #{pay_price}
+  							)
+  	</insert>
+  	
+  	<update id="orderFinish" parameterType="int">
+  		update product set product_stock = product_stock-1 , product_soldcount = product_soldcount+1 where product_no =#{product_no}
+  	</update>
+  	
+  	<select id="getOrderList" resultType="com.project.mall.command.OrderVO">
+  		select * from productorder where user_id = #{user_id}
+  	</select>
+  </mapper>

@@ -17,6 +17,9 @@
 		<input type="hidden" name="userAddress" th:value="${session.userVO.userAddress}">
 		<button type="submit" id="modifyBtn">정보수정하기</button>
 	</form>
+	<button><a th:href="@{/cart/cartlist(user_id=${session.userVO.userId})}">장바구니 목록</a></button>
+	
+	<button id="orderlist"><a th:href="@{/order/orderlist(user_id=${session.userVO.userId})}">주문내역</a></button>
 	<form action="deleteForm" method="post">
 		<input type="hidden" name="userId" th:value="${session.userVO.userId}">
 		<button type="submit">회원탈퇴</button>

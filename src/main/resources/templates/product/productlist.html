@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Product List</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
     <style>
         table {
             width: 100%;
@@ -42,9 +43,9 @@
         </tr>
         <!-- 아래 행들은 서버에서 동적으로 생성해야 합니다 -->
         <tr th:each="vo, status : ${list}">
-            <td>[[${vo.product_no}]]</td>
+            <td  >[[${vo.product_no}]]</td>
             <td>
-				<a title="상세보기(클릭)" th:href="@{/order/order(product_no=${vo.product_no})}">
+				<a  title="상세보기(클릭)" th:href="@{/order/order(product_no=${vo.product_no})}" >
 					[[${vo.product_name}]]		
 				</a>
 			</td>
@@ -54,13 +55,32 @@
             <td>[[${vo.product_soldcount}]]</td>
             <td th:text="${#temporals.format(vo.product_regdate, 'y년M월d일  HH시m분s초')}"></td>
             <td><img src="#"></td>
-            <td>카테고리</td>
-            <td>등록자아이디</td>
-            <td><button>장바구니</button></td>
+            <td  >[[${vo.category_no}]]</td>
+            <td>[[${vo.user_id}]]</td>
+            <td>
+	            <form action="/cart/getUserCartList" method="post">
+	    			<input type="text" name="product_no" th:value="${vo.product_no}">
+	    			<input type="text" name="boxcount" value="1">
+	    			<input type="text" name="product_price" th:value="${vo.product_price}">
+	    			<input type="text" name="user_id" th:value="${session.userVO.userId}">
+	    			<input type="text" name="category_id" th:value="${vo.category_no}">
+	    			<input type="text" name="product_name" th:value="${vo.product_name}">
+	    			<button type="submit">장바구니 추가</button>
+				</form>
+			</td>
             <td><button>바로구매</button></td>
         </tr>
         
         <!-- Add more products as needed -->
     </table>
 </body>
+<script th:inline="javascript">
+	var msg = '[[${msg}]]';
+	
+	if(msg.trim() != 'null') {
+		alert(msg);
+	}
+</script>
+
+
 </html>
