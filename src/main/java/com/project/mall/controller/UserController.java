@@ -48,7 +48,7 @@ public class UserController {
 	@PostMapping("/loginForm")
 	public String loginForm(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw,@RequestParam("userGrade") String userGrade , RedirectAttributes ra, Model model, HttpSession session) {
 		//아이디 비번 등급 정보로 login 실행
-		UserVO vo =userService.login(userId, userPw, userGrade);
+		UserVO vo = userService.login(userId, userPw, userGrade);
 		
 		try {	
 			// 아이디 비밀번호 잘못입력 했을때 nullpointexception 발생해서 try catch

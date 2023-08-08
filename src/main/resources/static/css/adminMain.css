@@ -1,0 +1,47 @@
+.contentArea {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.upperArea {
+  overflow: hidden;
+  margin-bottom: 10px;
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+}
+
+.registBtn {
+	border: 1px solid black;
+	border-radius: 0 0 0 0;
+	padding: 3px;
+}
+
+.infoArea {
+  float: left;
+}
+
+.myArea {
+  float: right;
+}
+
+.productArea {
+}
+
+.productContainer {
+
+}
+
+.productTable {
+	width: 100%;
+	text-align: center;
+}
+
+.productContainer td {
+  display: inline-block;
+  width: 20%;
+}
+
+.productTable tr {
+	height: 30px;
+	border: 1px solid black;
+}

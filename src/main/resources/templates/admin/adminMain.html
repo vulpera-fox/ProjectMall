@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org">
 
+<link rel="stylesheet" href="../css/adminMain.css">
+
+<th:block th:replace="~{./layout/layout :: layout(~{ :: #wrap})}">
+
+
+
+	<div id="wrap">
+
+		<div class="contentArea">
+      <div class="upperArea">
+        <div class="infoArea">
+          <p>정보가 나올 부분</p>
+        </div>
+        <div class="myArea">
+			<a class="registBtn" th:href="@{adminRegist}">상품 등록</a>
+        </div>
+      </div>
+      
+      <div class="productArea">
+        <div class="productContainer">
+			<table class="productTable">
+				<tr>
+					<td>상품정보</td>
+					<td>등록일</td>
+					<td>카테고리</td>
+					<td>가격</td>
+					<td>판매량</td>
+				</tr>
+				
+				<tr th:each="vo : ${list}" class="products">
+					<td>
+						<a th:href="@{adminDetail(product_no=${vo.product_no})}">
+							<span>[[${vo.product_name}]]</span>
+							<img src="#" alt="이미지가 들어갈 곳">
+						</a>
+					</td>
+					<td>[[${#temporals.format( vo.product_regdate, 'yyyy년 MM월 dd일' )}]]</td>
+					<td>[[${vo.category_no}]]</td>
+					<td>[[${vo.product_price}]]</td>
+					<td>[[${vo.product_soldcount}]]</td>
+				</tr>
+				
+				
+				
+			</table>
+        </div>
+        
+      </div>
+    </div>
+
+	</div>
+
+
+</th:block>
+
+<script th:inline="javascript">
+	
+	
+</script>
+
+  
 </body>
-</html>

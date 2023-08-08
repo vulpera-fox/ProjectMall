@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+<link rel="stylesheet" href="../css/adminDetail.css">
+
+<th:block th:replace="~{./layout/layout :: layout(~{ :: #wrap})}">
+
+
+
+	<div id="wrap">
+		<div id="container">
+			<div class="topArea">
+				<div class="titleArea">
+					<div class="titleLeft">
+						<p>상품이름</p>
+					</div>
+					<div class="titleRight">
+						<input type="text" name="product_name">
+					</div>
+				</div>
+
+				<div class="imageArea">
+					<div class="imageLeft">
+						<p>상품이미지</p>
+					</div>
+					<div class="imageRight">
+						<input type="file" name="file">
+					</div>
+				</div>
+
+				<div class="infoArea">
+					<table class="infoTable">
+						<tr class="tableHeader">
+							<td>가격</td>
+							<td>재고</td>
+							<td>판매량</td>
+						</tr>
+						<tr>
+							<td><input type="text" name="product_price" value="가격이들어가는곳"></td>
+							<td><input type="text" name="product_stock" value="재고가들어가는곳"></td>
+							<td><input type="text" name="product_salescount" value="판매량이들어가는곳(수정X)" readonly></td>
+						</tr>
+					</table>
+				</div>
+
+				<div class="descriptionArea">
+					<div class="descriptionLeft">
+						<p>상품설명</p>
+					</div>
+					<div class="descriptionRight">
+						<input type="text" name="product_description" value="설명이들어가는곳">
+					</div>
+
+				</div>
+			</div>
+
+
+
+		</div>
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+</th:block>
