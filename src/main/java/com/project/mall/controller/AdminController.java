@@ -1,18 +1,27 @@
 package com.project.mall.controller;
 
+import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.mall.admin.service.AdminService;
+import com.project.mall.command.ProductImageVO;
 import com.project.mall.command.ProductVO;
 import com.project.mall.command.UserVO;
 
@@ -24,7 +33,10 @@ public class AdminController {
 	private AdminService adminService;
 	
 	String user_id = "admin";
-
+	
+	@Value("${project.upload.path}")
+	private String uploadPath;
+	
 	
 	@RequestMapping("/adminMain")
 	public String main(ProductVO vo, Model model, HttpSession session) {
@@ -38,8 +50,17 @@ public class AdminController {
 		
 		List<ProductVO> list = adminService.getList(user_id);
 		
+		List<ProductImageVO> imageList = adminService.getProductImageList(list);
+		
+		int total = adminService.getTotal(user_id);
+		
+		System.out.println(total);
+		
+		
+		model.addAttribute("imageList", imageList);
 		model.addAttribute("uservo", uservo);
 		model.addAttribute("list", list);
+		
 		
 		
 		return "admin/adminMain";
@@ -66,9 +87,9 @@ public class AdminController {
 	
 	
 	@RequestMapping("/adminRegist")
-	public String regist() {
+	public String regist(Model model) {
 		
-		
+		model.addAttribute("user_id", user_id);
 		
 		return "admin/adminRegist";
 	}
@@ -77,8 +98,39 @@ public class AdminController {
 	@PostMapping("/modifyForm")
 	public String modifyForm(ProductVO vo) {
 		
+		System.out.println(vo.toString());
 		
-		return null;
+		adminService.updateDetail(vo);
+		
+		
+		
+		return "redirect:/admin/adminMain";
+	}
+	
+	@PostMapping("/deleteForm")
+	public String deleteForm(ProductVO vo) {
+		
+		adminService.deleteProduct(vo);
+		
+		
+		return "redirect:/admin/adminMain";
+	}
+	
+	@PostMapping("/registForm")
+	public String registForm(@Valid ProductVO vo, @RequestParam("product_image") MultipartFile product_image, Errors errors) {
+		
+		System.out.println("이미지의 확장자는 : " + product_image.getContentType());
+		
+		if(errors.hasErrors()) {
+			System.out.println("에러발생");
+			return "redirect:/admin/adminMain";
+		}
+		
+		
+		adminService.registProduct(vo, product_image);
+		
+		return "redirect:/admin/adminMain";
+		
 	}
 	
 	

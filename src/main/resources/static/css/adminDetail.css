@@ -32,7 +32,7 @@ li, ul {
 .titleLeft {
   float: left;
   width: 30%;
-  border-right: 1px sol black;
+  border-right: 1px solid black;
 }
 
 .titleRight {
@@ -42,6 +42,21 @@ li, ul {
 
 .titleRight input {
   width: 60%;
+  height: 40px;
+  font-size: 20px;
+}
+
+.categoryArea {
+	overflow: hidden;
+	border-bottom: 1px solid black;
+	height: 150px;
+	line-height: 150px;
+}
+
+.categoryLeft {
+	float: left;
+	width: 30%;
+	border-right: 1px solid black;
 }
 
 .imageArea {
@@ -54,6 +69,7 @@ li, ul {
 .imageLeft {
   float: left;
   width: 30%;
+  border-right: 1px solid black;
 }
 
 .imageRight {
@@ -89,21 +105,24 @@ li, ul {
   overflow: hidden;
   height: 200px;
   line-height: 200px;
-  padding: 10px 0;
+  border-bottom: 1px solid black;
 }
 
 .descriptionLeft {
   float: left;
   width: 30%;
+  border-right: 1px solid black;
 }
 
 .descriptionRight {
   float: right;
   width: 70%;
+  padding-left: 30px;
 }
 
 .descriptionRight input {
-  width: 100%;
+  width: 80%;
+  border: none;
 }
 
 .lowArea {
@@ -117,4 +136,35 @@ li, ul {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+}
+
+.categoryListWrap {
+    height: 100%;
+}
+.categoryListWrap .categoryList {
+    box-sizing: border-box;
+    float: left;
+    overflow: auto;
+    overflow-x: none;
+    width: 20%;
+    height: 100%;
+    padding: 7px  0;
+}
+.categoryListWrap .categoryList > li {
+    padding: 0px;
+}
+.categoryListWrap .categoryList a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    height: 26px;
+    padding: 0 20px;
+    line-height: 26px;
+    font-size: 13px;
+    color: #000;
+}
+.categoryListWrap .categoryList .on a {
+    background: #1db09e;
+    color: #fff;
 }

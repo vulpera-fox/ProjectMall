@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	
+
 <link rel="stylesheet" href="../css/adminDetail.css">
 
 <th:block th:replace="~{./layout/layout :: layout(~{ :: #wrap})}">
@@ -9,64 +9,185 @@
 
 	<div id="wrap">
 		<div id="container">
-			<div class="topArea">
-				<div class="titleArea">
-					<div class="titleLeft">
-						<p>상품이름</p>
+			<form action="registForm" method="post" id="detailForm" enctype="multipart/form-data">
+				<div class="topArea">
+					<div class="titleArea">
+						<div class="titleLeft">
+							<p>상품이름</p>
+						</div>
+						<div class="titleRight">
+							<input type="text" name="product_name" th:required="true">
+							<input type="text" name="user_id" hidden th:value="${user_id}">
+							<input type="hidden" name="category_no">
+						</div>
 					</div>
-					<div class="titleRight">
-						<input type="text" name="product_name">
+
+					<div class="categoryArea">
+						<div class="categoryLeft">
+							<p>카테고리</p>
+						</div>
+						<div class="categoryRight categoryListWrap">
+							
+						</div>
+					</div>
+
+					<div class="imageArea">
+						<div class="imageLeft">
+							<p>상품이미지</p>
+						</div>
+						<div class="imageRight">
+							<input type="file" name="product_image" onchange="preview_image(this);" required/>
+							<img id="product_image_preview" style="width: 200px; height: 150px; vertical-align: middle;">
+						</div>
+					</div>
+
+					<div class="infoArea">
+						<table class="infoTable">
+							<tr class="tableHeader">
+								<td>가격</td>
+								<td>재고</td>
+							</tr>
+							<tr>
+								<td><input type="text" name="product_price" placeholder="가격을 입력하세요"></td>
+								<td><input type="text" name="product_stock" placeholder="재고를 입력하세요"></td>
+							</tr>
+						</table>
+					</div>
+
+					<div class="descriptionArea">
+						<div class="descriptionLeft">
+							<p>상품설명</p>
+						</div>
+						<div class="descriptionRight">
+							<input type="text" name="product_description" style="display: block; height: 200px;">
+						</div>
+
 					</div>
 				</div>
-
-				<div class="imageArea">
-					<div class="imageLeft">
-						<p>상품이미지</p>
-					</div>
-					<div class="imageRight">
-						<input type="file" name="file">
-					</div>
-				</div>
-
-				<div class="infoArea">
-					<table class="infoTable">
-						<tr class="tableHeader">
-							<td>가격</td>
-							<td>재고</td>
-							<td>판매량</td>
-						</tr>
-						<tr>
-							<td><input type="text" name="product_price" value="가격이들어가는곳"></td>
-							<td><input type="text" name="product_stock" value="재고가들어가는곳"></td>
-							<td><input type="text" name="product_salescount" value="판매량이들어가는곳(수정X)" readonly></td>
-						</tr>
-					</table>
-				</div>
-
-				<div class="descriptionArea">
-					<div class="descriptionLeft">
-						<p>상품설명</p>
-					</div>
-					<div class="descriptionRight">
-						<input type="text" name="product_description" value="설명이들어가는곳">
+				<div class="lowArea">
+					<div class="buttonArea">
+						<button type="submit" class="reigstBtn btn">상품 등록</button>
 					</div>
 
 				</div>
-			</div>
-
-
+			</form>
 
 		</div>
 
 	</div>
 
 
-
-
-
-
-
-
-
-
 </th:block>
+
+<script th:inline="javascript">
+
+	$(document).ready(function () {
+
+		$.ajax({
+			type: "get",
+			url: "../getCategory",
+			success: function (response) {
+
+				var category01 = "";
+
+				category01 += '<ul class="categoryList" style="position: relative;" onclick="getCategory_List(event);">';
+
+				response.forEach(function (item) {
+					category01 += '<li><a href="#" data-set=' + JSON.stringify(item) + '>' + item.category_detail_nm + '</a></li>'
+				});
+
+				category01 += '</ul>';
+
+				console.log(category01);
+
+				// 아래에 추가 - appendChild()
+				$(".categoryRight").append(category01);
+			},
+			error: function (status, error) {
+				console.log(status, error);
+			}
+		})
+	})
+
+	$.fn.category_remove = function () {
+		while (this.next().length != 0) {
+			$(this).next().remove();
+		}
+	}
+	
+	function category_create(data) {
+
+
+		var category = "";
+		category += '<ul class="categoryList" style="position: relative;" onclick="getCategory_List(event);" >';
+		data.forEach(function (result, index) {
+			console.log(JSON.stringify(result));
+			category += '<li><a href="#" data-set=' + JSON.stringify(result) + '>' + result.category_detail_nm + '</a></li>';
+		});
+		category += '</ul>';
+		console.log(category);
+		$(".categoryRight").append(category);
+	}
+
+
+	function getCategory_List(e) {
+		e.preventDefault(); //고유이벤트중지
+		if (e.target.tagName != 'A') return; //태그검증
+		var obj = $(e.target).data("set"); //데이터셋을 가져옴
+
+		//토글색처리
+		$(e.currentTarget).find("a").removeClass("sub_menu_select");
+		$(e.target).addClass("sub_menu_select");
+		$(e.target).parent().siblings().removeClass("on");
+		$(e.target).parent().addClass("on");
+		//태그처리
+		if (obj.category_lv == 1 || obj.category_lv == 2) {
+			console.log('1lv');
+			$(e.currentTarget).category_remove(); //이전 카테고리삭제
+
+			$.ajax({
+				url: "../getCategoryChild/" + obj.group_id + "/" + obj.category_lv + "/" + obj.category_detail_lv,
+				type: "get",
+				success: function (response) {
+
+
+					category_create(response);
+				},
+				error: function (status, error) {
+					alert('카테고리조회에실패했습니다관리자에게문의하세요');
+				}
+
+			})
+
+		}
+		$(e.target).category_set(); // 히든태그에 값을 지정
+		console.log($(e.target));
+
+	}
+
+
+
+	$.fn.category_set = function () {
+		var category_id = this.data("set").category_id;
+		var group_id = this.data("set").group_id;
+		
+		console.log(category_id + ":" + group_id);
+		$("input[name='category_no']").val(group_id + category_id); //name이 prod_category인 곳에 추가
+	}
+	
+	
+	function preview_image(input) {
+		if(input.files && input.files[0]){
+		var reader = new FileReader();
+		reader.onload = function(e){
+			document.getElementById("product_image_preview").src = e.target.result;
+		};
+		reader.readAsDataURL(input.files[0]);
+		} else {
+			document.getElementById("product_image_preview").src = "";
+		}
+	}
+	
+
+	
+</script>
