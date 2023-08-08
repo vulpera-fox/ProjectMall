@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>주문내역</h3>
+	<h3>[[${session.userVO.userId}]]님의 주문내역</h3>
+	<th:block th:each="vo, status : ${list}">
+		<ul>
+			<li>주문번호:[[${vo.ordernumber}]]</li>
+			<li>이미지사진</li>
+			<li>상품이름:[[${vo.product_name}]]</li>
+			<li>폰번호:[[${session.userVO.userPhone}]]</li>
+			<li>주소:[[${session.userVO.userAddress}]]</li>
+			<li>[[${vo.orderdetailaddress}]]</li>
+			<li>[[${vo.pay_price}]]</li>
+			<li th:text="${#temporals.format(vo.orderdate, 'y년M월d일  HH시m분')}"></li>
+		</ul>
+	</th:block>
+</body>
+</html>

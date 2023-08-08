@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>장바구니</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
+    <style>
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h2 style="text-align:center;">장바구니</h2>
+
+<table>
+    <thead>
+        <!-- ... -->
+    </thead>
+    <div id="userId" th:text="${session.userVO.userId}" style="display: none;"></div>
+    <tbody th:each="vo : ${list}">
+    <tr>
+        <td th:text="${vo.product_name}"></td>
+        <td><input type="number" class="test" th:value="${vo.boxcount}" onchange="calculateTotalPrice()"></td>
+        <td><input type="text" th:value="${vo.product_price}" readonly></td>   
+    </tr>
+	</tbody>
+	
+</table>
+<div>
+	<input id="totalPrice" type="text" value="">
+    
+</div>
+
+</body>
+<script>
+function calculateTotalPrice() {
+        let total = 0;
+        const rows = document.querySelectorAll("tbody tr");
+
+        rows.forEach(row => {
+            const count = parseInt(row.querySelector("input[type='number']").value, 10);
+            const price = parseInt(row.querySelector("input[type='text']").value, 10);
+
+            total += count * price;
+        });
+
+        document.getElementById("totalPrice").value = total;
+    }
+
+    var test = document.querySelectorAll(".test");
+    document.addEventListener("DOMContentLoaded", calculateTotalPrice); // 화면 로드 시 총 가격 계산
+
+    
+</script>
+</html>
