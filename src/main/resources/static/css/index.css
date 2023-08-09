@@ -63,7 +63,7 @@ input[type=text], select{min-width:60px;}
   display:block;
   content:'';
   }
-.right_content{min-width:950px; position:relative; margin-left:160px; padding: 50px;}	
+.right_content{min-width:950px; position:relative; margin-left:160px; padding: 50px; overflow: hidden;}	
 
 
 .full_collum .content{border:1px solid #ededed; height:0; overflow:hidden;}
@@ -112,6 +112,27 @@ input[type=text], select{min-width:60px;}
 .board_basic_view tr td{ border-bottom:1px solid #ededed; padding-left:12px; line-height:30px; height:45px; text-align:left;}
 .board_basic_view tr td .write_edit_area{width:100%; margin:10px auto; border:1px solid #ededed; height:600px;}
 
+.board_basic_view2{border-top:1px solid #ededed; border-right:1px solid #ededed;}
+.board_basic_view2 tr th{width:140px; background-color:#edf0f5; text-align:center; border-bottom:1px solid #fff; border-right:1px solid #ededed; height:45px; line-height:45px; }
+.board_basic_view2 tr td{ border-bottom:1px solid #ededed; padding-left:12px; line-height:30px; height:45px; text-align:left;}
+
+
+.wrap_detail {
+	overflow: hidden;
+}
+
+.wrap_detail .smallImage {
+	float:left;
+	width:50%;
+	padding: 70px;
+}
+
+
+.wrap_detail .productInfo {
+	float:left;
+	width:50%;
+	padding:70px;
+}
 
 
 /* btn */
@@ -148,9 +169,11 @@ input[type='radio'] { display: none;}
 	cursor: pointer;
 	background: url(../img/radio_btn.png) no-repeat 0 0;
 }
+
 input[type='checkbox'] {
-        display: none;    /* 실제 체크박스 없애기 */
+        display: none;    
 }
+
 .checkbox_box input[type=checkbox]:checked + .checkbox_icon{
 	background-position: 0 0;
 }
@@ -633,6 +656,12 @@ a.sub_menu_select {color: #f1f1f1; background-color: #00acac;}
     width: 100%;
     height: auto;
 }
+
+
+
+
+
+
 /* 댓글영역 */
 .reply_area .reply_content {overflow: hidden;}
 .reply_area .right {
@@ -678,3 +707,5 @@ a.sub_menu_select {color: #f1f1f1; background-color: #00acac;}
 .imagelist li:last-child {
     margin-right: 0;
 }
+
+.form_wrap {width:100%;}

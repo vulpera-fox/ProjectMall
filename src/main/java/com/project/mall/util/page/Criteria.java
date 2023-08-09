@@ -11,7 +11,7 @@ public class Criteria {
 	
 	//검색에 필요한 키워드를 선언
 	private String searchName;
-	private String searchRowPrice;
+	private String searchLowPrice;
 	private String searchHighPrice;
 	private String searchPrice;
 	private String searchSold;

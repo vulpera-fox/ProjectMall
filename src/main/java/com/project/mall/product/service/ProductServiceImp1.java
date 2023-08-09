@@ -15,20 +15,20 @@ public class ProductServiceImp1 implements ProductService {
 	private ProductMapper productMapper;
 	
 	@Override
-	public ArrayList<ProductVO> getList() {
+	public ArrayList<ProductVO> getList(Criteria cri) {
 		
-		return productMapper.getList();
-	}
-
-	@Override
-	public ArrayList<ProductVO> kewordSerach() {
-		
-		return productMapper.kewordSerach();
+		return productMapper.getList(cri);
 	}
 
 	@Override
 	public int getTotal(Criteria cri) {
 		return productMapper.getTotal(cri);
+	}
+
+	@Override
+	public ProductVO getDetail(int product_no) {
+		
+		return productMapper.getDetail(product_no);
 	}
 
 }
