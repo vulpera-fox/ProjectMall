@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.mall.command.CategoryVO;
-import com.project.mall.command.Criteria;
 import com.project.mall.command.ProductImageVO;
 import com.project.mall.command.ProductVO;
+import com.project.mall.util.page.Criteria;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -140,6 +140,12 @@ public class AdminServiceImpl implements AdminService {
 		
 		
 		return adminMapper.getTotal(user_id);
+	}
+
+
+	@Override
+	public ProductImageVO getProductImage(ProductVO vo) {
+		return adminMapper.getProductImage(vo);
 	}
 	
 	

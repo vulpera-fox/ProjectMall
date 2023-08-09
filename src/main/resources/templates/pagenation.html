@@ -2,30 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="pageNation(pageVO)">
+	<head>
+		<style>
+			.page ul li {
+				display: inline;
+			}
+		</style>
+	</head>
 	
 	<div class="page">
-		<li>
+		<ul>
+			<li><a th:href="@{adminMain(page=1)}" th:text="'<<'"></a></li>
 			
+			<li><a th:href="@{adminMain(page=${pagevo.start-1})}" th:text="'<'"></a></li>
 			
-			<ul><a th:href="@{adminMain(page=1)}">처음으로</a></ul>
+			<th:block th:each="page : ${pagevo.pageList}">
+				<li><a th:href="@{adminMain(page=${page})}">[[${page}]]</a></li>
+			</th:block>
 			
-			<ul><a>이전페이지로</a></ul>
+			<li><a th:href="@{adminMain(page=${pagevo.end+1})}" th:text="'>'"></a></ul>
 			
-			<ul><a>현재페이지네이션</a></ul>
+			<li><a th:href="@{adminMain(page=${pagevo.realEnd})}" th:text="'>>'"></a></li>
 			
-			<ul><a>다음페이지로</a></ul>
-			
-			<ul><a>마지막으로</a></ul>
-			
-			
-			
-			
-		</li>
-		
-		
-		
+		</ul>
 	</div>
-	
 	
 	
 	

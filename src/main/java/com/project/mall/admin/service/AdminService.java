@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.mall.command.CategoryVO;
-import com.project.mall.command.Criteria;
 import com.project.mall.command.ProductImageVO;
 import com.project.mall.command.ProductVO;
+import com.project.mall.util.page.Criteria;
 
 public interface AdminService {
 	
@@ -26,8 +26,11 @@ public interface AdminService {
 	
 	public ArrayList<CategoryVO> getCategoryChild(CategoryVO vo);
 	
+	public ProductImageVO getProductImage(ProductVO vo);
+	
 	public List<ProductImageVO> getProductImageList(List<ProductVO> list);
 	
 	public int getTotal(String user_id);
+	
 	
 }

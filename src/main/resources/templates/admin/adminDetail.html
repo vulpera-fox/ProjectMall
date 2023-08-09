@@ -24,7 +24,7 @@
 							<p>상품이미지</p>
 						</div>
 						<div class="imageRight">
-							<img src="fox.jpg" alt="사진이 들어가는곳">
+							<img th:src="@{../display(filePath=${imagevo.filePath}, fileName=${imagevo.fileName}, uuid=${imagevo.uuid})}" alt="사진이 들어가는곳" style="width: 200px; height: 150px;">
 						</div>
 					</div>
 

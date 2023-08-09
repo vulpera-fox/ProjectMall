@@ -46,3 +46,13 @@
 	height: 30px;
 	border: 1px solid black;
 }
+
+.pagenation ul {
+	display: inline-block;
+}
+
+.pagenation li{
+	margin: 0 auto;
+	width: 50%;
+	text-align: center;
+}

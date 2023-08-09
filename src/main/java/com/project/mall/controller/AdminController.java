@@ -21,11 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.mall.admin.service.AdminService;
-import com.project.mall.command.Criteria;
-import com.project.mall.command.PageVO;
 import com.project.mall.command.ProductImageVO;
 import com.project.mall.command.ProductVO;
 import com.project.mall.command.UserVO;
+import com.project.mall.util.page.Criteria;
+import com.project.mall.util.page.PageVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -52,9 +52,14 @@ public class AdminController {
 		
 		List<ProductVO> list = adminService.getList(user_id, cri);
 		
-		List<ProductImageVO> imageList = adminService.getProductImageList(list);
-		
 		int total = adminService.getTotal(user_id);
+		
+		if(total > 0) {
+			
+			List<ProductImageVO> imageList = adminService.getProductImageList(list);
+			model.addAttribute("imageList", imageList);
+		}
+		
 		
 		PageVO pageVO = new PageVO(cri,total);
 		
@@ -62,8 +67,8 @@ public class AdminController {
 		
 		System.out.println(total);
 		
+		model.addAttribute("pagevo", pageVO);
 		
-		model.addAttribute("imageList", imageList);
 		model.addAttribute("uservo", uservo);
 		model.addAttribute("list", list);
 		
@@ -82,9 +87,12 @@ public class AdminController {
 		
 		ProductVO vo = adminService.getDetail(product_no, user_id);
 		
+		ProductImageVO imagevo = adminService.getProductImage(vo);
+		
 		System.out.println(vo.toString());
 		
 		model.addAttribute("vo", vo);
+		model.addAttribute("imagevo", imagevo);
 		
 		
 		return "admin/adminDetail";

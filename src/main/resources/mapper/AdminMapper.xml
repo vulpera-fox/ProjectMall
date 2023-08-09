@@ -69,15 +69,21 @@
   	<select id="getProductImageList" resultType="ProductImageVO" >
   	
 	  		select * from product_image 
-	  		where product_no in 
-	  		<foreach collection="list" item="vo" open="(" separator="," close=")">
-	  			#{vo.product_no}
-	  		</foreach>
+	  		
+	  		<if test="list != null and list.size != 0">
+		  		where product_no in 
+		  		<foreach collection="list" item="vo" open="(" separator="," close=")">
+		  			#{vo.product_no}
+		  		</foreach>
+	  		</if>
   	</select>
   	
   	<select id="getTotal">
   		select count(*) as total from product where user_id = #{user_id}
+  	</select>
   	
+  	<select id="getProductImage">
+  		select * from product_image where product_no = #{product_no}
   	</select>
 	
 

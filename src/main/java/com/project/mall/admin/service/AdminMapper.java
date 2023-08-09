@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.project.mall.command.CategoryVO;
-import com.project.mall.command.Criteria;
 import com.project.mall.command.ProductImageVO;
 import com.project.mall.command.ProductVO;
+import com.project.mall.util.page.Criteria;
 
 @Mapper
 public interface AdminMapper {
@@ -30,6 +30,8 @@ public interface AdminMapper {
 	public ArrayList<CategoryVO> getCategory();
 	
 	public ArrayList<CategoryVO> getCategoryChild(CategoryVO vo);
+	
+	public ProductImageVO getProductImage(ProductVO vo);
 	
 	public List<ProductImageVO> getProductImageList(List<ProductVO> list);
 	
