@@ -34,8 +34,6 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
-	String user_id = "admin";
-	
 	@Value("${project.upload.path}")
 	private String uploadPath;
 	
@@ -43,10 +41,12 @@ public class AdminController {
 	@RequestMapping("/adminMain")
 	public String main(ProductVO vo, Model model, HttpSession session, Criteria cri) {
 		
+		UserVO uservo = (UserVO)session.getAttribute("userVO");
 		
-		UserVO uservo = (UserVO)session.getAttribute("vo");
+		System.out.println(uservo.toString());
 		
-//		String user_id = uservo.getUserId();
+		String user_id = uservo.getUserId();
+		
 		
 		System.out.println(user_id);
 		
@@ -81,11 +81,11 @@ public class AdminController {
 	@GetMapping("/adminDetail")
 	public String detail(@RequestParam("product_no") int product_no, Model model, HttpSession session) {
 		
-		UserVO uservo = (UserVO)session.getAttribute("vo");
+		UserVO uservo = (UserVO)session.getAttribute("userVO");
 		
 		System.out.println(product_no);
 		
-		ProductVO vo = adminService.getDetail(product_no, user_id);
+		ProductVO vo = adminService.getDetail(product_no, uservo.getUserId());
 		
 		ProductImageVO imagevo = adminService.getProductImage(vo);
 		
@@ -101,9 +101,11 @@ public class AdminController {
 	
 	
 	@RequestMapping("/adminRegist")
-	public String regist(Model model) {
+	public String regist(Model model, HttpSession session) {
 		
-		model.addAttribute("user_id", user_id);
+		UserVO uservo = (UserVO)session.getAttribute("userVO");
+		
+		model.addAttribute("user_id", uservo.getUserId());
 		
 		return "admin/adminRegist";
 	}

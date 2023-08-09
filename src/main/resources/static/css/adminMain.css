@@ -1,13 +1,17 @@
+#wrap {
+	padding-bottom: 30px;
+}
+
 .contentArea {
-  width: 90%;
-  margin: 0 auto;
+	width: 90%;
+	margin: 0 auto;
 }
 
 .upperArea {
-  overflow: hidden;
-  margin-bottom: 10px;
-  border-bottom: 1px solid black;
-  padding: 10px 0;
+	overflow: hidden;
+	margin-bottom: 10px;
+	border-bottom: 1px solid black;
+	padding: 10px 0;
 }
 
 .registBtn {
@@ -17,20 +21,17 @@
 }
 
 .infoArea {
-  float: left;
+	float: left;
 }
 
 .myArea {
-  float: right;
+	float: right;
 }
 
 
-.productArea {
-}
+.productArea {}
 
-.productContainer {
-
-}
+.productContainer {}
 
 .productTable {
 	width: 100%;
@@ -38,8 +39,8 @@
 }
 
 .productContainer td {
-  display: inline-block;
-  width: 20%;
+	display: inline-block;
+	width: 20%;
 }
 
 .productTable tr {
@@ -48,11 +49,21 @@
 }
 
 .pagenation ul {
-	display: inline-block;
+	text-align: center;
 }
 
-.pagenation li{
-	margin: 0 auto;
-	width: 50%;
-	text-align: center;
+.pagenation li {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+}
+
+.pagenation a {
+	text-decoration: none;
+	color: black;
+}
+
+.pagenation .on {
+	background-color: lightblue;
 }

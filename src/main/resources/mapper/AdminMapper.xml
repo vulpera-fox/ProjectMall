@@ -25,7 +25,7 @@
   		) b
   		
   		on a.category_no = b.category_key
-  		where user_id = #{user_id} limit #{cri.pageStart}, 10
+  		where user_id = #{user_id} limit #{cri.pageStart}, #{cri.amount}
 	</select>
 	
 	<select id="getDetail" resultType="ProductVO">
