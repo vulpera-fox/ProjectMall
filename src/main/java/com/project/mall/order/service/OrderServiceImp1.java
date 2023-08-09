@@ -37,4 +37,12 @@ public class OrderServiceImp1 implements OrderService{
 		return orderMapper.getOrderList(user_id);
 	}
 
+	@Override
+	public void deleteFinish(int product_no) {
+		orderMapper.deleteFinish(product_no);
+		
+	}
+	
+	
+
 }
