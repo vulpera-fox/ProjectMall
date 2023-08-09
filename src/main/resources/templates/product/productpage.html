@@ -21,10 +21,8 @@
          <!-- left_menu end -->
          <div class="right_content">
             <div class="midiaq">
-               <div class="page_title">TI</div>
-
-               <form name="searchForm1" action="productpage" method="get" >
-				   
+           
+               <form name="searchForm1" action="productpage" method="get" class="form_wrap">
                <input type="hidden" name="page" value="1">   
                <input type="hidden" name="amount" th:value="${pageVO.amount}">   
                <div class="search_block flfull">
@@ -32,7 +30,7 @@
                   <div class="fl">
                      <div>
                         <span class="search_th">상품이름 검색</span>
-                        <input type="text" class="" placeholder="상품 검색" name="searchName" th:value="${pageVO.cri.searchName}">
+                        <span><input type="text" class="" placeholder="상품 검색" name="searchName" th:value="${pageVO.cri.searchName}"></span>
                      
                      </div>
     
@@ -40,10 +38,10 @@
                       <span class="search_th">판매가 정렬</span>
                         <select class="" name="searchPrice">
                            <option value="none" >정렬방식</option>
-                           <option value="asc" name="searchPrice" th:selected="${pageVO.cri.searchPrice == 'asc'}">가격 낮은순</option>
-                           <option value="desc" name="searchPrice" th:selected="${pageVO.cri.searchPrice == 'desc'}">가격 높은순</option>
-                           <option value="desc" name="searchSold" th:selected="${pageVO.cri.searchSold == 'desc'}">판매량 순</option>
-                           <option value="desc" name="searchNewItem" th:selected="${pageVO.cri.searchNewItem == 'desc'}">신상품 순</option>
+                           <option value="asc" name="1" th:selected="${pageVO.cri.searchPrice == 'asc'}">가격 낮은순</option>
+                           <option value="desc1" name="2" th:selected="${pageVO.cri.searchPrice == 'desc'}">가격 높은순</option>
+                           <option value="desc2" name="3" th:selected="${pageVO.cri.searchPrice == 'desc'}">판매량 순</option>
+                           <option value="desc3" name="4" th:selected="${pageVO.cri.searchPrice == 'desc'}">신상품 순</option>
 
                         </select>
                      </div>
@@ -145,6 +143,8 @@
         event.preventDefault(); // Prevent the default action
         document.searchForm1.submit();
     }
+    
+    
 </script>
 </body>
 </html>
