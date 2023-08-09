@@ -121,11 +121,9 @@
 		var category = "";
 		category += '<ul class="categoryList" style="position: relative;" onclick="getCategory_List(event);" >';
 		data.forEach(function (result, index) {
-			console.log(JSON.stringify(result));
 			category += '<li><a href="#" data-set=' + JSON.stringify(result) + '>' + result.category_detail_nm + '</a></li>';
 		});
 		category += '</ul>';
-		console.log(category);
 		$(".categoryRight").append(category);
 	}
 
@@ -161,7 +159,6 @@
 
 		}
 		$(e.target).category_set(); // 히든태그에 값을 지정
-		console.log($(e.target));
 
 	}
 

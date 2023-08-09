@@ -6,12 +6,13 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.mall.command.CategoryVO;
+import com.project.mall.command.Criteria;
 import com.project.mall.command.ProductImageVO;
 import com.project.mall.command.ProductVO;
 
 public interface AdminService {
 	
-	public List<ProductVO> getList(String user_id);
+	public List<ProductVO> getList(String user_id, Criteria cri);
 	
 	public ProductVO getDetail(int product_no, String user_id);
 	

@@ -33,7 +33,5 @@ public class WebConfig implements WebMvcConfigurer {
 		.excludePathPatterns("/user/findPwForm")
 		.excludePathPatterns("/user/changePwForm");
 		
-	}
-	
-	
+	}	
 }

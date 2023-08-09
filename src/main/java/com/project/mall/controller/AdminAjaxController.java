@@ -55,7 +55,6 @@ public class AdminAjaxController {
 			
 			arr = FileCopyUtils.copyToByteArray(file);
 			
-			System.out.println(arr);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

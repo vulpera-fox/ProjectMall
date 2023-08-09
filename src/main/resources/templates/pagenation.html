@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 
-</body>
-</html>
+<th:block th:fragment="pageNation(pageVO)">
+	
+	<div class="page">
+		<li>
+			
+			
+			<ul><a th:href="@{adminMain(page=1)}">처음으로</a></ul>
+			
+			<ul><a>이전페이지로</a></ul>
+			
+			<ul><a>현재페이지네이션</a></ul>
+			
+			<ul><a>다음페이지로</a></ul>
+			
+			<ul><a>마지막으로</a></ul>
+			
+			
+			
+			
+		</li>
+		
+		
+		
+	</div>
+	
+	
+	
+	
+</th:block>

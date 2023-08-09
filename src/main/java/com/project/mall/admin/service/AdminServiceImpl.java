@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.mall.command.CategoryVO;
+import com.project.mall.command.Criteria;
 import com.project.mall.command.ProductImageVO;
 import com.project.mall.command.ProductVO;
 
@@ -39,8 +40,8 @@ public class AdminServiceImpl implements AdminService {
 
 
 	@Override
-	public List<ProductVO> getList(String user_id) {
-		return adminMapper.getList(user_id);
+	public List<ProductVO> getList(String user_id, Criteria cri) {
+		return adminMapper.getList(user_id, cri);
 	}
 
 	@Override

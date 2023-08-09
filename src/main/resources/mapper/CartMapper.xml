@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.project.mall.cart.service.CartMapper">
+  	
+    <!-- 장바구니에 있는지 먼저 검사 -->
+    <select id="getUserCartList" resultType="int">
+    	SELECT COUNT(*) FROM cart 
+        WHERE product_no = #{product_no} AND user_id = #{user_id}
+    </select>
+    
+    <insert id="cartAdd" parameterType="com.project.mall.command.CartVO">
+    	INSERT INTO cart( boxcount, product_no, user_id, category_id, product_name, product_price)
+	            VALUES( #{boxcount}, #{product_no}, #{user_id}, #{category_id}, #{product_name}, #{product_price})
+    </insert>
+    
+    <update id="updateCart" parameterType="com.project.mall.command.CartVO">
+    	UPDATE cart
+            SET boxcount = boxcount + #{boxcount}
+            WHERE product_no = #{product_no} AND user_id = #{user_id}
+    </update>
+    
+    <select id="getCartlist" resultType="com.project.mall.command.CartVO">
+    	select * from cart where user_id = #{user_id}
+    </select>
+    
+    <select id="getTotalPrice" resultType="int">
+    	select COALESCE(sum(product_price*boxcount), 0) as totalPrice 
+    	from cart
+    	where user_id = #{user_id};
+    </select>
+    
+    <update id="updateQuantity">
+    	update cart set boxcount = #{boxcount} WHERE product_no = #{product_no} AND user_id = #{user_id}
+    </update>
+
+  </mapper>

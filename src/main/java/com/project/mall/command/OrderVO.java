@@ -24,5 +24,7 @@ public class OrderVO {
 	private String orderdetailaddress; //상세주소
 	private String ordermemo; //요구사항
 	private LocalDateTime orderdate; //주문날자
+	private String product_name; //상품이름
+	private int pay_price; //상품가격
 	
 }

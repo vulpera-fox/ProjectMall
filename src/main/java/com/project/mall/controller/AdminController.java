@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.mall.admin.service.AdminService;
+import com.project.mall.command.Criteria;
+import com.project.mall.command.PageVO;
 import com.project.mall.command.ProductImageVO;
 import com.project.mall.command.ProductVO;
 import com.project.mall.command.UserVO;
@@ -39,7 +41,7 @@ public class AdminController {
 	
 	
 	@RequestMapping("/adminMain")
-	public String main(ProductVO vo, Model model, HttpSession session) {
+	public String main(ProductVO vo, Model model, HttpSession session, Criteria cri) {
 		
 		
 		UserVO uservo = (UserVO)session.getAttribute("vo");
@@ -48,11 +50,15 @@ public class AdminController {
 		
 		System.out.println(user_id);
 		
-		List<ProductVO> list = adminService.getList(user_id);
+		List<ProductVO> list = adminService.getList(user_id, cri);
 		
 		List<ProductImageVO> imageList = adminService.getProductImageList(list);
 		
 		int total = adminService.getTotal(user_id);
+		
+		PageVO pageVO = new PageVO(cri,total);
+		
+		System.out.println(pageVO.toString());
 		
 		System.out.println(total);
 		
