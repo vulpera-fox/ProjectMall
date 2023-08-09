@@ -1,4 +1,4 @@
-package com.project.mall.controller;
+ package com.project.mall.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -65,7 +65,7 @@ public class UserController {
 
 		//등급 정보가져와서 관리자면 관리자페이지 이동 추후에 다시 경로 설정  
 		if(userVO.getUserGrade().equals("관리자")) {		
-			return "user/mypage";
+			return "redirect:/admin/adminMain";
 		}else {	
 //			return "redirect:/user/mypage";
 			return "redirect:/product/productpage";

@@ -2,6 +2,10 @@ package com.project.mall.command;
 
 import java.time.LocalDateTime;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,8 +26,10 @@ public class ProductVO {
 	private LocalDateTime product_regdate;
 	private String image_no;
 	private String category_no;
-
 	private String user_id;
+
 	private String category_nav;
+
+	
 
 }

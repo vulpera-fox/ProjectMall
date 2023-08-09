@@ -1,23 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h3 {
+            background-color: #fff;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e5e5e5;
+        }
+
+        ul {
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 5px;
+            list-style-type: none;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+        }
+
+        li {
+            padding: 5px 0;
+        }
+
+        li:first-child {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-	<h3>주문내역</h3>
-	<h3>[[${session.userVO.userId}]]님의 주문내역</h3>
-	<th:block th:each="vo, status : ${list}">
-		<ul>
-			<li>주문번호:[[${vo.ordernumber}]]</li>
-			<li>이미지사진</li>
-			<li>상품이름:[[${vo.product_name}]]</li>
-			<li>폰번호:[[${session.userVO.userPhone}]]</li>
-			<li>주소:[[${session.userVO.userAddress}]]</li>
-			<li>[[${vo.orderdetailaddress}]]</li>
-			<li>[[${vo.pay_price}]]</li>
-			<li th:text="${#temporals.format(vo.orderdate, 'y년M월d일  HH시m분')}"></li>
-		</ul>
-	</th:block>
+    <h3>주문내역</h3>
+    <h3>[[${session.userVO.userId}]]님의 주문내역</h3>
+    <th:block th:each="vo, status : ${list}">
+        <ul>
+            <li>주문번호:[[${vo.ordernumber}]]</li>
+            <li>이미지사진</li>
+            <li>상품이름:[[${vo.product_name}]]</li>
+            <li>폰번호:[[${session.userVO.userPhone}]]</li>
+            <li>주소:[[${session.userVO.userAddress}]]</li>
+            <li>[[${vo.pay_price}]]</li>
+            <li th:text="${#temporals.format(vo.orderdate, 'y년M월d일  HH시m분')}"></li>
+        </ul>
+    </th:block>
 </body>
 </html>
