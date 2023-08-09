@@ -5,13 +5,87 @@
 <mapper namespace="com.project.mall.admin.service.AdminMapper">
 
 
-	<select id="getList">
-		select * from product where user_id = #{user_id} limit 0, 10
+	<select id="getList" resultType="ProductVO">
+		select a.*, b.category_nav from product a left join (
+  		
+  		SELECT
+        CONCAT(A1.group_ID, A1.CATEGORY_ID) AS CATEGORY_KEY, ##카테고리 키 (그룹 + 키 형태로 카테고리분류)
+ 	    CASE A1.category_parent_LV
+ 	        WHEN 0 THEN A1.category_detail_NM
+ 			WHEN 1 THEN CONCAT(A2.category_detail_NM,' > ', A1.category_detail_NM)
+ 			WHEN 2 THEN CONCAT(A3.category_detail_NM, ' > ', A2.category_detail_NM,' > ', A1.category_detail_NM)
+ 	    END as CATEGORY_NAV
+		FROM category A1
+		LEFT OUTER JOIN category A2
+		ON A1.CATEGORY_PARENT_LV = A2.CATEGORY_LV AND A1.CATEGORY_DETAIL_PARENT_LV = A2.CATEGORY_DETAIL_LV AND A1.GROUP_ID = A2.GROUP_ID
+		LEFT OUTER JOIN category A3
+		ON A2.CATEGORY_PARENT_LV = A3.CATEGORY_LV AND A2.CATEGORY_DETAIL_PARENT_LV = A3.CATEGORY_DETAIL_LV
+		ORDER BY CATEGORY_NAV ASC
+  		
+  		) b
+  		
+  		on a.category_no = b.category_key
+  		where user_id = #{user_id} limit #{cri.pageStart}, #{cri.amount}
 	</select>
 	
-	<select id="getDetail">
+	<select id="getDetail" resultType="ProductVO">
 		select * from product where product_no = #{product_no} and user_id = #{user_id}
 	</select>
+	
+	<update id="updateDetail">
+		update product set product_name = #{product_name},
+						   product_price = #{product_price},
+						   product_stock = #{product_stock},
+						   product_description = #{product_description}
+						   where product_no = #{product_no}
+	</update>
+	
+	<insert id="registProduct">
+		insert into product (product_name, product_price, product_stock, product_description, category_no, user_id) values (#{product_name}, #{product_price}, #{product_stock}, #{product_description}, #{category_no}, #{user_id})
+	</insert>
+	
+	<insert id="registProductImage">
+		<selectKey order="BEFORE" keyProperty="product_no" resultType="int">
+  			select max(product_no) as product_no from product where user_id = #{user_id}
+  		</selectKey>
+		insert into product_image (filename, filepath, uuid, product_no, user_id) values (#{fileName}, #{filePath}, #{uuid}, #{product_no}, #{user_id})
+	</insert>
+	
+	<delete id="deleteProduct">
+		delete from product where product_no = #{product_no}
+	</delete>
+	
+	<select id="getCategory" resultType="CategoryVO">
+  		select * from category where category_lv = 1
+  	</select>
+  	
+  	
+  	<select id="getCategoryChild" resultType="CategoryVO">
+  		select * from category where group_id = #{group_id} 
+  										 and category_parent_lv = #{category_lv} 
+  										 and category_detail_parent_lv = #{category_detail_lv}
+  	</select>
+  	
+  	<select id="getProductImageList" resultType="ProductImageVO" >
+  	
+	  		select * from product_image 
+	  		
+	  		<if test="list != null and list.size != 0">
+		  		where product_no in 
+		  		<foreach collection="list" item="vo" open="(" separator="," close=")">
+		  			#{vo.product_no}
+		  		</foreach>
+	  		</if>
+  	</select>
+  	
+  	<select id="getTotal">
+  		select count(*) as total from product where user_id = #{user_id}
+  	</select>
+  	
+  	<select id="getProductImage">
+  		select * from product_image where product_no = #{product_no}
+  	</select>
+	
 
 
 
