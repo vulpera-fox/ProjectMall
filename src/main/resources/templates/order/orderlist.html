@@ -38,7 +38,7 @@
     </style>
 </head>
 <body>
-    <h3>주문내역</h3>
+    <h3 id="backBtn">주문내역</h3>
     <h3>[[${session.userVO.userId}]]님의 주문내역</h3>
     <th:block th:each="vo, status : ${list}">
         <ul>
@@ -52,4 +52,10 @@
         </ul>
     </th:block>
 </body>
+<script>
+	var backBtn = document.getElementById("backBtn")
+	backBtn.onclick = () => {
+		location.href= "/user/mypage";
+	}
+</script>
 </html>

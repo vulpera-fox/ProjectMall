@@ -60,9 +60,7 @@
             border-radius: 5px;
         }
 
-        input[type="text"]:read-only {
-            background-color: #e5e5e5;
-        }
+        
         input[type="number"] {
 			width: 80%;
 		}
@@ -122,7 +120,7 @@
             </td>
             <td th:text="${vo.product_name}"></td>
            
-            <td><input type="number" class="test" th:value="${vo.boxcount}" onchange="calculateTotalPrice()"></td>
+            <td><input type="number" class="test" th:value="${vo.boxcount}" onchange="calculateTotalPrice()" min="0"></td>
             <td><input type="text" name="pay_price" th:value="${vo.product_price}" readonly></td>
             <td>
                 <input type="hidden" name="paymentmethod" value="신용카드">
@@ -160,6 +158,10 @@
 			const productName = row.querySelector("td:nth-child(2)").textContent;
         	const count = row.querySelector("input[type='number']").value;
         	const price = row.querySelector("input[type='text']").value;
+        	if (count < 0) {
+            count = 0;
+            row.querySelector("input[type='number']").value = 0;
+       		}
         	
         	if(row.querySelector("input[type='checkbox']").checked) {
 				productData.push({

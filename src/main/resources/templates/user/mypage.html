@@ -65,13 +65,16 @@
 <th:block th:replace="~{/layout/layout :: layout( ~{:: .wrap})}">
 	
 
-<div class="wrap">
-	<div class="wrap_inner">
-		<div class="right_content">
-	<h3>로그인성공</h3>
-	<h3 th:text="${session.userVO.userName}+'님 안녕하세요'"></h3>
-	<h3 th:text="${session.userVO.userId}"></h3>
-	<button id="logoutBtn"><a>로그아웃</a></button>
+<div class="wrap" style="width: 300px; height: 300px; margin:0 auto;" >
+	<div class="wrap_inner" >
+<section style="border-radius: 0.5%;">
+	
+		
+		<div class="box" >
+	
+	<h3 style="font-size: large; font-weight: 1000;" th:text="${session.userVO.userName}+'님 안녕하세요'"></h3>
+	
+	<button id="logoutBtn"><a style="color: white;">로그아웃</a></button>
 	<form action="modifyForm" method="post">
 		<input type="hidden" name="userId" th:value="${session.userVO.userId}">
 		<input type="hidden" name="userName" th:value="${session.userVO.userName}">
@@ -79,16 +82,17 @@
 		<input type="hidden" name="userAddress" th:value="${session.userVO.userAddress}">
 		<button type="submit" id="modifyBtn">정보수정하기</button>
 	</form>
-	<button><a th:href="@{/cart/cartlist(user_id=${session.userVO.userId})}">장바구니 목록</a></button>
-	
-	<button id="orderlist"><a th:href="@{/order/orderlist(user_id=${session.userVO.userId})}">주문내역</a></button>
+	<button><a style="color: white;" th:href="@{/cart/cartlist(user_id=${session.userVO.userId})}">장바구니 목록</a></button><br/>
+	<button id="orderlist"><a style="color: white;" th:href="@{/order/orderlist(user_id=${session.userVO.userId})}">주문내역</a></button>
 	<form action="deleteForm" method="post">
 		<input type="hidden" name="userId" th:value="${session.userVO.userId}">
-		<button type="submit">회원탈퇴</button>
+		<button type="submit" style="color: red;">회원탈퇴</button>
 	</form>
 		</div>
+		</section>
 	</div>
-</div>		
+</div>	
+	
 </th:block>
 </body>
 
