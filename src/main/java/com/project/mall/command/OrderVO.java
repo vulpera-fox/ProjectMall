@@ -21,8 +21,8 @@ public class OrderVO {
 	private String ordername; //UserVO 주문자이름
 	private String orderaddress; //UserVO 주소
 	private int orderphone; //UserVO 번호
-	private String orderdetailaddress; //상세주소
-	private String ordermemo; //요구사항
+	
+	
 	private LocalDateTime orderdate; //주문날자
 	private String product_name; //상품이름
 	private int pay_price; //상품가격
