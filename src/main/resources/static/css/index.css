@@ -148,9 +148,11 @@ input[type='radio'] { display: none;}
 	cursor: pointer;
 	background: url(../img/radio_btn.png) no-repeat 0 0;
 }
+
 input[type='checkbox'] {
-        display: none;    /* 실제 체크박스 없애기 */
+        display: none;    
 }
+
 .checkbox_box input[type=checkbox]:checked + .checkbox_icon{
 	background-position: 0 0;
 }
