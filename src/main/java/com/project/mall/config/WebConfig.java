@@ -32,6 +32,7 @@ public class WebConfig implements WebMvcConfigurer {
 		.excludePathPatterns("/user/findpw_ok")
 		.excludePathPatterns("/user/findPwForm")
 		.excludePathPatterns("/user/changePwForm")
+		.excludePathPatterns("/product/productpage")
 		.addPathPatterns("/admin/**");
 		
 	}	
