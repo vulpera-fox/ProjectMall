@@ -37,7 +37,7 @@ public class ProductController {
 
 		model.addAttribute("list", list);
 		model.addAttribute("pageVO", pageVO);
-		System.out.println(list.toString());
+		
 		System.out.println(pageVO.toString());
 		System.out.println(cri);
 
