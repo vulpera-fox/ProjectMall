@@ -147,6 +147,18 @@ public class AdminServiceImpl implements AdminService {
 	public ProductImageVO getProductImage(ProductVO vo) {
 		return adminMapper.getProductImage(vo);
 	}
+
+
+	@Override
+	public List<ProductVO> getSearchedList(String user_id, Criteria cri, String product_name) {
+		return adminMapper.getSearchedList(user_id, cri, product_name);
+	}
+
+
+	@Override
+	public int getSearchedTotal(String user_id, String product_name) {
+		return adminMapper.getSearchedTotal(user_id, product_name);
+	}
 	
 	
 	

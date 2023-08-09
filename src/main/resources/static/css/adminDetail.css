@@ -49,13 +49,14 @@ li, ul {
 .categoryArea {
 	overflow: hidden;
 	border-bottom: 1px solid black;
-	height: 150px;
-	line-height: 150px;
+	height: 200px;
+	line-height: 200px;
 }
 
 .categoryLeft {
 	float: left;
 	width: 30%;
+	height: 100%;
 	border-right: 1px solid black;
 }
 

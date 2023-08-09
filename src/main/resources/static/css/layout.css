@@ -82,6 +82,12 @@ li, ul {
 
 }
 
-.shortcut li ul {
+.shortcut ul li {
   display: inline;
+  padding: 5px;
+}
+
+.shortcut ul li a {
+	color: white;
+	font-size: 15px;
 }
