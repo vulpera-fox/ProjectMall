@@ -31,11 +31,14 @@ public class ProductController {
 	@GetMapping("/productpage")
 	public String productpage(ProductVO vo, Criteria cri, Model model ) {
 		
-		ArrayList<ProductVO> list = productService.getList();
+		ArrayList<ProductVO> list = productService.getList(cri);
+		int total = productService.getTotal(cri);
 		
 		PageVO pageVO = new PageVO(cri, total);
 		model.addAttribute("list", list);
 		model.addAttribute("pageVO", pageVO);
+		System.out.println(list.toString());
+		System.out.println(pageVO.toString());
 
 		
 		return "product/productpage";
@@ -46,9 +49,7 @@ public class ProductController {
 										   	  , Model model) {
 		ProductVO vo = productService.getDetail(product_no);
 		model.addAttribute("vo", vo);
-		System.out.println(vo.toString());	
-		System.out.println(1);
-		
+	
 		return "product/productDetail";
 	}
 
