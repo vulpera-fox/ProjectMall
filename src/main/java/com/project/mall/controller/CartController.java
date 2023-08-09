@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.mall.cart.service.CartService;
 import com.project.mall.command.CartVO;
@@ -37,14 +38,16 @@ public class CartController {
 	}
 	//장바구니에 담기
 	@PostMapping("/getUserCartList")
-	public String getUserCartList(@ModelAttribute CartVO vo) {
+	public String getUserCartList(@ModelAttribute CartVO vo, RedirectAttributes ra) {
 		int result = cartService.getUserCartList(vo);
 		if(result == 0) {
-			cartService.cartAdd(vo);			
+			cartService.cartAdd(vo);
+			ra.addFlashAttribute("msg","장바구니에 추가되었습니다.");
 		}else {
 			cartService.updateCart(vo);
+			ra.addFlashAttribute("msg","장바구니에 추가되었습니다.");
 		}
-		return "redirect:/product/productlist";
+		return "redirect:/product/productpage";
 	}
 	
 	@GetMapping("/cartlist")

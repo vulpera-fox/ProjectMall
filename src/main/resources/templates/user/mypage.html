@@ -1,11 +1,73 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<body>
+
+    <style>
+        body {
+            
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .wrap_inner input,
+        .wrap_inner button {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 222px;
+            border-radius: 5px;
+        }
+
+        .wrap_inner button {
+            background-color: #008CBA;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .title {
+            align-self: flex-start;
+        }
+
+        .title h3 {
+            text-align: left;
+        }
+
+        .loginInfo a {
+            font-size: 12px;
+            text-decoration: none;
+            color: black;
+        }
+    </style>	
+</style>
+<th:block th:replace="~{/layout/layout :: layout( ~{:: .wrap})}">
+	
+
+<div class="wrap">
+	<div class="wrap_inner">
+		<div class="right_content">
 	<h3>로그인성공</h3>
 	<h3 th:text="${session.userVO.userName}+'님 안녕하세요'"></h3>
 	<h3 th:text="${session.userVO.userId}"></h3>
@@ -24,6 +86,10 @@
 		<input type="hidden" name="userId" th:value="${session.userVO.userId}">
 		<button type="submit">회원탈퇴</button>
 	</form>
+		</div>
+	</div>
+</div>		
+</th:block>
 </body>
 
 <script th:inline="javascript">

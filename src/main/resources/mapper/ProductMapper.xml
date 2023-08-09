@@ -27,9 +27,14 @@
 		 
   	<!-- 	<if test="cri.searchName != null and cri.searchName != ''">
   		and product_name like concat('%', #{cri.searchName},'%')
-  		</if>  -->
+  		</if>  
+
+		 
+  		<if test="cri.searchName != '' and cri.searchName != null">
+  		and product_name like concat('%',#{cri.searchName},'%')
+  		</if>
   		 		
-   	<!-- 	<if test="cri.searchLowPrice != '' and cri.searchLowPrice != null">
+   		<if test="cri.searchLowPrice != '' and cri.searchLowPrice != null">
 		<![CDATA[and product_price >= #{cri.searchLowPrice}]]>
   		</if> 
   		
@@ -40,23 +45,9 @@
   		
   		order by
   		
-  	 
-  		<if test="cri.searchLowPrice == 'asc'">
-  			product_price asc,
-  		</if>
-  		<if test="cri.searchHighPrice == 'desc'">
-  			product_price desc,
-  		</if>
-  		<if test="cri.searchSold == 'desc'">
-  			product_soldcount desc,
-  		</if>
-  		<if test="cri.searchNewItem == 'desc'">
-  			product_regdate desc,
-  		</if>
-  		 
-  		
   		product_no asc
-  		limit #{cri.pageStart}, #{cri.amount}
+  		limit #{pageStart}, #{amount}
+  		-->
   	</select>
   	
   	

@@ -14,6 +14,7 @@
 							<p>상품이름</p>
 						</div>
 						<div class="titleRight">
+							<input type="text" name="product_no" hidden th:value="${vo.product_no}">
 							<input type="text" name="product_name" th:value="${vo.product_name}">
 						</div>
 					</div>
@@ -23,7 +24,7 @@
 							<p>상품이미지</p>
 						</div>
 						<div class="imageRight">
-							<img src="fox.jpg" alt="사진이 들어가는곳">
+							<img th:src="@{../display(filePath=${imagevo.filePath}, fileName=${imagevo.fileName}, uuid=${imagevo.uuid})}" alt="사진이 들어가는곳" style="width: 200px; height: 150px;">
 						</div>
 					</div>
 
@@ -47,7 +48,7 @@
 							<p>상품설명</p>
 						</div>
 						<div class="descriptionRight">
-							<input type="text" name="product_description" value="설명이들어가는곳"
+							<input type="text" name="product_description" th:value="${vo.product_description}"
 								style="display: block; height: 200px;">
 						</div>
 

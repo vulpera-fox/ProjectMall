@@ -1,9 +1,10 @@
-package com.project.mall.controller;
+ package com.project.mall.controller;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -46,26 +47,28 @@ public class UserController {
 	
 	//로그인 하고 mypage로 이동
 	@PostMapping("/loginForm")
-	public String loginForm(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw,@RequestParam("userGrade") String userGrade , RedirectAttributes ra, Model model, HttpSession session) {
+	public String loginForm(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw,@RequestParam("userGrade") String userGrade , RedirectAttributes ra, Model model,/* HttpSession session*/ HttpServletRequest httpServletSession) {
 		//아이디 비번 등급 정보로 login 실행
 		UserVO userVO =userService.login(userId, userPw, userGrade);
-		
 		try {	
-			// 아이디 비밀번호 잘못입력 했을때 nullpointexception 발생해서 try catch
 			if(userVO.getUserId() == null) {
 			}
 		} catch (Exception e) {
 			ra.addFlashAttribute("msg", "아이디와 비밀번호를 확인하세요");
 			return "redirect:/user/login";
 		}
+		httpServletSession.getSession().invalidate();
+		HttpSession session = httpServletSession.getSession(true);
 		
 		session.setAttribute("userVO",userVO);	
+		session.setMaxInactiveInterval(1800);
+
 		//등급 정보가져와서 관리자면 관리자페이지 이동 추후에 다시 경로 설정  
 		if(userVO.getUserGrade().equals("관리자")) {		
-			return "user/mypage";
+			return "redirect:/admin/adminMain";
 		}else {	
 //			return "redirect:/user/mypage";
-			return "redirect:/product/productlist";
+			return "redirect:/product/productpage";
 		}
 	}
 	//마이페이지
@@ -80,13 +83,16 @@ public class UserController {
 	public String modify() {
 		return "user/modify";
 	}
-	//@RequestParam("userId") String userId, @RequestParam("userName") String userName, @RequestParam("userPhone") String userPhone, @RequestParam("userAddress") String userAddress
-	//정보 수정하러 가기
+	
 	@PostMapping("/modifyForm")
 	public String modifyForm(UserVO vo, HttpSession session) {
 		UserVO userVO = (UserVO)session.getAttribute("vo");
-		System.out.println(userVO.toString());
-		session.setAttribute("userVO", userVO);
+		if (userVO != null) {
+		    System.out.println(userVO.toString());
+		} else {
+		    System.out.println("userVO is null");
+		}
+
 		return "redirect:/user/modify";
 	}
 	//정보수정하고 마이페이지로 이동

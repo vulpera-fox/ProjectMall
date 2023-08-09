@@ -10,8 +10,12 @@
 	<meta charset="EUC-KR" />
 
     <!--공통 -->
+<<<<<<< HEAD
 	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/productDetail.css}" />
+=======
+
+>>>>>>> c4efe903178787c4a85a4e858815d4550cbbbde5
 	<link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/loading.css}" />  
@@ -20,7 +24,7 @@
 		integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 	<script th:src="@{/js/jquery-1.12.1.min.js}"></script>
 	<script th:src="@{/js/jquery-ui.min.js}"></script>
-	<script th:src="@{/js/style.js}"></script>
+
 
 	<!--개인 -->
 	<link rel="stylesheet" type="text/css" th:href="@{/css/modal.css}" />
@@ -110,5 +114,75 @@
 	
 </body>
 </th:block>>
+<<<<<<< HEAD
 
+=======
+
+
+<th:block th:fragment="layout(content)">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+			<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" />
+			<script th:src="@{/js/style.js}"></script>
+		<link rel="stylesheet" href="../css/layout.css">
+		<script src="../js/adminMain.js"></script>
+		<script src="../js/jquery-3.7.0.min.js"></script>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+	</head>
+	
+	
+
+	<body>
+
+		<header id="header">
+			<div class="headerLeft">
+				<a class="logo" th:href="@{/product/productpage}" style="color: white;"><span>MUSINSA</span></a>
+				<div class="searchZone">
+					<form id="searchForm" action="searchForm" method="get">
+						<input type="text">
+						<span class="search_btn">Q</span>
+					</form>
+				</div>
+			</div>
+			<div class="headerRight">
+				<div class="shortcut">
+					<li>
+						<ul><a>상의</a></ul>
+						<ul><a>하의</a></ul>
+						<ul><a>아우터</a></ul>
+						<ul><a>액세서리</a></ul>
+						<ul style="margin-left: 100px;"><a th:href="@{../user/login}" style="text-decoration: none; color: white;">로그인</a></ul>
+					</li>
+				</div>
+			</div>
+
+		</header>
+
+		<aside id="aside">
+			<div>
+
+			</div>
+
+
+
+		</aside>
+
+		<div th:replace="${content}">
+
+		</div>
+
+
+
+
+	</body>
+
+</th:block>
+
+
+>>>>>>> c4efe903178787c4a85a4e858815d4550cbbbde5
 </html>

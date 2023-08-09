@@ -1,6 +1,7 @@
 package com.project.mall.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.mall.command.OrderVO;
+import com.project.mall.command.OrderVOListWrapper;
 import com.project.mall.command.ProductVO;
 import com.project.mall.order.service.OrderService;
 
@@ -37,12 +39,17 @@ public class OrderController {
 	@PostMapping("/orderForm")
 	public String orderForm(@ModelAttribute OrderVO vo, RedirectAttributes ra,@RequestParam("product_no") int product_no) {
 		int result = orderService.insertOrderList(vo);
+		System.out.println(vo.toString());
 		if(result == 1 ) {
 			orderService.orderFinish(product_no);
-			ra.addFlashAttribute("msg","주문이 완료되었습니다");
+			if(vo.getPaymentmethod().equals("계좌이체")) {
+				ra.addFlashAttribute("msg","015-1235-123125 국민은행으로 입금바랍니다.!!");
+			}else {
+				ra.addFlashAttribute("msg","주문이 완료되었습니다");
+			}
 		}
 		System.out.println(vo.toString());
-		return "redirect:/product/productlist";
+		return "redirect:/product/productpage";
 	}
 	
 	//주문내역
@@ -51,5 +58,21 @@ public class OrderController {
 		ArrayList<OrderVO> list = orderService.getOrderList(user_id);
 		model.addAttribute("list",list);
 		return "order/orderlist";
+	}
+	
+	@PostMapping("/orderForm1")
+	public String orderForm(@RequestBody List<OrderVO> orderList, RedirectAttributes ra) {
+		
+		for(OrderVO vo : orderList) {
+	       int result = orderService.insertOrderList(vo);
+	       orderService.orderFinish(vo.getProduct_no());
+           if(vo.getPaymentmethod().equals("계좌이체")) {
+               ra.addFlashAttribute("msg","015-1235-123125 국민은행으로 입금바랍니다.!!");
+           } else {
+               ra.addFlashAttribute("msg","주문이 완료되었습니다");
+           }
+           orderService.deleteFinish(vo.getProduct_no());
+	   }
+	   return "redirect:/product/productpage";
 	}
 }

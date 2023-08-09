@@ -30,9 +30,9 @@ public class WebConfig implements WebMvcConfigurer {
 		.excludePathPatterns("/user/findIdForm")
 		.excludePathPatterns("/user/findpw")
 		.excludePathPatterns("/user/findpw_ok")
-
 		.excludePathPatterns("/user/findPwForm")
-		.excludePathPatterns("/user/changePwForm");
+		.excludePathPatterns("/user/changePwForm")
+		.addPathPatterns("/admin/**");
 		
 	}	
 }

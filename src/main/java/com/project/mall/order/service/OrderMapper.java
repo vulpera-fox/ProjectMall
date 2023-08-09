@@ -14,4 +14,5 @@ public interface OrderMapper {
 	public int insertOrderList(OrderVO vo); //주문하고 주문내역 저장 //단일 바로구매 기능
 	public void orderFinish(int product_no); //주문하고 상품 재고랑 판매개수 올리기
 	public ArrayList<OrderVO> getOrderList(String user_id); //주문내역 조회
+	public void deleteFinish(int product_no); //구매한제품 장바구니에서 제거
 }
