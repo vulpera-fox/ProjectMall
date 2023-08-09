@@ -19,7 +19,9 @@
 				<li th:class="${page == pagevo.page ? 'on' : ''}"><a th:href="@{adminMain(page=${page})}">[[${page}]]</a></li>
 			</th:block>
 			
-			<li><a th:href="@{adminMain(page=${pagevo.end+1})}" th:text="'>'"></a></li>
+			<th:block th:if="${pagevo.next}">
+				<li><a th:href="@{adminMain(page=${pagevo.end+1})}" th:text="'>'"></a></li>
+			</th:block>
 			
 			<li><a th:href="@{adminMain(page=${pagevo.realEnd})}" th:text="'>>'"></a></li>
 			

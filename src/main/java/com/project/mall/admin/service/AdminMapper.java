@@ -16,6 +16,8 @@ public interface AdminMapper {
 	
 	public List<ProductVO> getList(@Param("user_id") String user_id, @Param("cri") Criteria cri);
 	
+	public List<ProductVO> getSearchedList(@Param("user_id") String user_id, @Param("cri") Criteria cri, @Param("product_name") String product_name);
+	
 	public ProductVO getDetail(@Param("product_no") int product_no, @Param("user_id") String user_id);
 	
 	public void updateDetail(ProductVO vo);
@@ -36,5 +38,7 @@ public interface AdminMapper {
 	public List<ProductImageVO> getProductImageList(List<ProductVO> list);
 	
 	public int getTotal(String user_id);
+	
+	public int getSearchedTotal(@Param("user_id") String user_id, @Param("product_name") String product_name); 
 
 }

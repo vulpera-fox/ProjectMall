@@ -14,6 +14,8 @@ public interface AdminService {
 	
 	public List<ProductVO> getList(String user_id, Criteria cri);
 	
+	public List<ProductVO> getSearchedList(String user_id, Criteria cri, String product_name);
+	
 	public ProductVO getDetail(int product_no, String user_id);
 	
 	public void updateDetail(ProductVO vo);
@@ -31,6 +33,8 @@ public interface AdminService {
 	public List<ProductImageVO> getProductImageList(List<ProductVO> list);
 	
 	public int getTotal(String user_id);
+	
+	public int getSearchedTotal(String user_id, String product_name);
 	
 	
 }
