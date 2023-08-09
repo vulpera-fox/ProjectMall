@@ -25,29 +25,32 @@ public class ProductController {
 
 	private ProductService productService;
 	
-	
-	
-	@GetMapping("/productlist")
-	public String productlist(Criteria cri, ProductVO vo, Model model,/*@RequestParam String searchName*/@RequestParam(value = "searchName", required = false, defaultValue = "") String searchName) {
-		ArrayList<ProductVO> list = productService.getList();
-		model.addAttribute("list",list);
-		return "product/productlist";
-	}
-	
+
+
 	@GetMapping("/productpage")
 	public String productpage(ProductVO vo, Criteria cri, Model model ) {
 		
-		ArrayList<ProductVO> list = productService.getList();
+		ArrayList<ProductVO> list = productService.getList(cri);
+		int total = productService.getTotal(cri);
+		PageVO pageVO = new PageVO(cri, total);
+		
+
 		model.addAttribute("list", list);
-		
-//		int total = productService.getTotal(cri);
-//		PageVO pageVO = new PageVO(cri, total);
-//		
-//		model.addAttribute("pageVO", pageVO);
-//		System.out.println(pageVO.toString());
-		
-		
+		model.addAttribute("pageVO", pageVO);
+		System.out.println(list.toString());
+		System.out.println(pageVO.toString());
+		System.out.println(cri);
+
 		return "product/productpage";
+	}
+	
+	@RequestMapping("/productDetail")
+	public String productDetail(@RequestParam("product_no") int product_no
+										   	  , Model model) {
+		ProductVO vo = productService.getDetail(product_no);
+		model.addAttribute("vo", vo);
+	
+		return "product/productDetail";
 	}
 
 }

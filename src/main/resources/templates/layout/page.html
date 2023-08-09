@@ -8,13 +8,7 @@
 					<!-- 가장 첫 페이지-->
 					<li>
 						<a th:href="@{productpage(page=1,
-												  amount=${pageVO.amount},
-												  searchName=${pageVO.cri.searchName},
-												  searchRowPrice=${pageVO.cri.searchRowPrice},
-												  searchHighPrice=${pageVO.cri.searchHighPrice},
-												  searchPrice=${pageVO.cri.searchPrice},
-												  searchSold=${pageVO.cri.searchSold},
-												  searchNewItem=${pageVO.cri.searchNewItem}
+												  amount=${pageVO.amount}												  
 												  )}">
 												  <i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
 					
@@ -25,12 +19,7 @@
 					<th:block th:if="${pageVO.prev}">
 					<li style="margin-right:5px;">
 						<a th:href="@{productpage(page=${pageVO.start - 1},
-												  amount=${pageVO.amount},
-												  searchRowPrice=${pageVO.cri.searchRowPrice},
-												  searchHighPrice=${pageVO.cri.searchHighPrice},
-												  searchPrice=${pageVO.cri.searchPrice},
-												  searchSold=${pageVO.cri.searchSold},
-												  searchNewItem=${pageVO.cri.searchNewItem}
+												  amount=${pageVO.amount}												  
 												  )}">
 												  <i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
 					</th:block>
@@ -40,12 +29,7 @@
 						
 					<li th:class="${page == pageVO.page ? 'on' : ''}">
 						<a th:href="@{productpage(page=${page},
-									  			  amount=${pageVO.amount},
-									  			  searchRowPrice=${pageVO.cri.searchRowPrice},
-												  searchHighPrice=${pageVO.cri.searchHighPrice},
-												  searchPrice=${pageVO.cri.searchPrice},
-												  searchSold=${pageVO.cri.searchSold},
-												  searchNewItem=${pageVO.cri.searchNewItem}
+									  			  amount=${pageVO.amount}
 									  			  )}">[[${page}]]</a></li>
 					</th:block>	
 				
@@ -53,12 +37,7 @@
 					<th:block th:if="${pageVO.next}">
 					<li style="margin-left:5px;">
 						<a th:href="@{productpage(page=${pageVO.end + 1},
-											   amount=${pageVO.amount},
-											   searchRowPrice=${pageVO.cri.searchRowPrice},
-											   searchHighPrice=${pageVO.cri.searchHighPrice},
-											   searchPrice=${pageVO.cri.searchPrice},
-											   searchSold=${pageVO.cri.searchSold},
-											   searchNewItem=${pageVO.cri.searchNewItem}
+											   amount=${pageVO.amount}
 											   )}">
 											   <i class="fa fa-angle-right"	aria-hidden="true"></i></a></li>
 					</th:block>	
@@ -69,12 +48,7 @@
 					<!-- 가장 긑 페이지 한번에 이동-->
 					<li>
 						<a th:href="@{productpage(page=${pageVO.realEnd},
-											   	  amount=${pageVO.amount},
-											   	  searchRowPrice=${pageVO.cri.searchRowPrice},
-												  searchHighPrice=${pageVO.cri.searchHighPrice},
-												  searchPrice=${pageVO.cri.searchPrice},
-												  searchSold=${pageVO.cri.searchSold},
-												  searchNewItem=${pageVO.cri.searchNewItem}
+											   	  amount=${pageVO.amount}
 											   )}">
 											   <i class="fa fa-angle-double-right"	aria-hidden="true"></i></a></li>
 						

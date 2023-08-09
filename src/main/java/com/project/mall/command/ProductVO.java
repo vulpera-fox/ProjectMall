@@ -27,6 +27,9 @@ public class ProductVO {
 	private String image_no;
 	private String category_no;
 	private String user_id;
-	private String CATEGORY_NAV;
+
+	private String category_nav;
+
+	
 
 }
