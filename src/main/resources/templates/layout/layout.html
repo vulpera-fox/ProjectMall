@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<<<<<<< HEAD
+
 
 <th:block th:fragment="setContent(content)">
 
@@ -11,6 +11,7 @@
 
     <!--공통 -->
 	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/productDetail.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/loading.css}" />  
@@ -109,79 +110,5 @@
 	
 </body>
 </th:block>>
-=======
 
-<th:block th:fragment="layout(content)">
-
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Document</title>
-		<link rel="stylesheet" href="../css/layout.css">
-		<script src="../js/adminMain.js"></script>
-		<script src="../js/jquery-3.7.0.min.js"></script>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
-	</head>
-
-	<body>
-
-		<header id="header">
-			<div class="headerLeft">
-				<a class="logo"><span>MUSINSA</span></a>
-				<div class="searchZone">
-					<form id="searchForm" action="searchForm" method="get">
-						<input type="text">
-						<span class="search_btn">Q</span>
-					</form>
-				</div>
-			</div>
-			<div class="headerRight">
-				<div class="shortcut">
-					<li>
-						<ul><a>클리어런스</a></ul>
-						<ul><a>무제한쿠폰</a></ul>
-						<ul><a>브랜드위크</a></ul>
-						<ul><a>랭킹</a></ul>
-						<ul><a>업데이트</a></ul>
-						<ul><a>코디</a></ul>
-						<ul><a>세일</a></ul>
-						<ul><a>스페셜</a></ul>
-						<ul><a>매거진</a></ul>
-					</li>
-				</div>
-			</div>
-
-		</header>
-
-		<aside id="aside">
-			<div>
-
-			</div>
-
-
-
-		</aside>
-
-		<div th:replace="${content}">
-
-		</div>
-
-
-		<div id="footer">
-			<footer>
-				<div class="footerContent">
-					<p>여기는푸터</p>
-				</div>
-			</footer>
-
-		</div>
-
-
-	</body>
-
-</th:block>
-
->>>>>>> ash
 </html>

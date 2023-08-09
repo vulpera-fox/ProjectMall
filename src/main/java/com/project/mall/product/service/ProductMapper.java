@@ -15,4 +15,6 @@ public interface ProductMapper {
 										@Param("cri") Criteria cri);
 	public ArrayList<ProductVO> kewordSerach();
 	public int getTotal(Criteria cri);
+	public ProductVO getDetail(int product_no);
+
 }

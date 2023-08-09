@@ -31,4 +31,10 @@ public class ProductServiceImp1 implements ProductService {
 		return productMapper.getTotal(cri);
 	}
 
+	@Override
+	public ProductVO getDetail(int product_no) {
+		
+		return productMapper.getDetail(product_no);
+	}
+
 }

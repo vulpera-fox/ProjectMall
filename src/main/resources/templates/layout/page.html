@@ -10,7 +10,7 @@
 						<a th:href="@{productpage(page=1,
 												  amount=${pageVO.amount},
 												  searchName=${pageVO.cri.searchName},
-												  searchRowPrice=${pageVO.cri.searchRowPrice},
+												  searchLowPrice=${pageVO.cri.searchLowPrice},
 												  searchHighPrice=${pageVO.cri.searchHighPrice},
 												  searchPrice=${pageVO.cri.searchPrice},
 												  searchSold=${pageVO.cri.searchSold},
@@ -26,7 +26,7 @@
 					<li style="margin-right:5px;">
 						<a th:href="@{productpage(page=${pageVO.start - 1},
 												  amount=${pageVO.amount},
-												  searchRowPrice=${pageVO.cri.searchRowPrice},
+												  searchLowPrice=${pageVO.cri.searchLowPrice},
 												  searchHighPrice=${pageVO.cri.searchHighPrice},
 												  searchPrice=${pageVO.cri.searchPrice},
 												  searchSold=${pageVO.cri.searchSold},
@@ -41,7 +41,7 @@
 					<li th:class="${page == pageVO.page ? 'on' : ''}">
 						<a th:href="@{productpage(page=${page},
 									  			  amount=${pageVO.amount},
-									  			  searchRowPrice=${pageVO.cri.searchRowPrice},
+									  			  searchLowPrice=${pageVO.cri.searchLowPrice},
 												  searchHighPrice=${pageVO.cri.searchHighPrice},
 												  searchPrice=${pageVO.cri.searchPrice},
 												  searchSold=${pageVO.cri.searchSold},
@@ -54,7 +54,7 @@
 					<li style="margin-left:5px;">
 						<a th:href="@{productpage(page=${pageVO.end + 1},
 											   amount=${pageVO.amount},
-											   searchRowPrice=${pageVO.cri.searchRowPrice},
+											   searchLowPrice=${pageVO.cri.searchLowPrice},
 											   searchHighPrice=${pageVO.cri.searchHighPrice},
 											   searchPrice=${pageVO.cri.searchPrice},
 											   searchSold=${pageVO.cri.searchSold},
@@ -70,7 +70,7 @@
 					<li>
 						<a th:href="@{productpage(page=${pageVO.realEnd},
 											   	  amount=${pageVO.amount},
-											   	  searchRowPrice=${pageVO.cri.searchRowPrice},
+											   	  searchLowPrice=${pageVO.cri.searchLowPrice},
 												  searchHighPrice=${pageVO.cri.searchHighPrice},
 												  searchPrice=${pageVO.cri.searchPrice},
 												  searchSold=${pageVO.cri.searchSold},

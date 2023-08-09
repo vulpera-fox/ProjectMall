@@ -25,6 +25,7 @@
 							<div>
 								<span class="search_th">상품이름 검색</span>
 								<input type="text" class="" placeholder="상품 검색" name="searchName" th:value="${pageVO.cri.searchName}">
+							
 							</div>
 							
 							<!--<div>
@@ -32,17 +33,17 @@
 								<input type="text" class="" placeholder="상품 검색">
 							</div>-->
 							
-	<!--						<div>
+							<div>
 								<span class="search_th">판매가 정렬</span>
 								<select class="" name="">
-									<option value="">정렬방식</option>
-									<option value="">가격 낮은순</option>
-									<option value="">가격 높은순</option>
-									<option value="">판매량 순</option>
-									<option value="">높은순</option>
+									<option value="none" >정렬방식</option>
+									<option value="asc" name="searchLowPrice" th:selected="${pageVO.cri.searchLowPrice == 'asc'}">가격 낮은순</option>
+									<option value="desc" name="searchHighPrice" th:selected="${pageVO.cri.searchHighPrice == 'desc'}">가격 높은순</option>
+									<option value="desc" name="searchSold" th:selected="${pageVO.cri.searchSold == 'desc'}">판매량 순</option>
+									<option value="desc" name="searchNewItem" th:selected="${pageVO.cri.searchNewItem == 'desc'}">신상품 순</option>
 
 								</select>
-							</div>-->
+							</div>
 						</div>
 
 						<div class="fr">
@@ -60,11 +61,12 @@
 								<a href="#"><span>낮은가격 순</span></a>
 								<a href="#"><span>높은가격 순</span></a>
 							</li>-->
+							
 							<li class="collum_tit">
-								<span><a href="#" th:style="${'color:white'}" name="searchSold" th:value="${pageVO.cri.searchSold}">판매량 순</a></span>
+								<!--<span><a href="#" th:style="${'color:white'}" name="searchSold" th:value="${pageVO.cri.searchSold}">판매량 순</a></span>
 								<span><a href="#" th:style="${'color:white'}" name="searchNewItem" th:value="${pageVO.cri.searchNewItem}">신상품 순</a></span>
-								<span><a href="#" th:style="${'color:white'}" name="searchRowPrice" th:value="${pageVO.cri.searchRowPrice}">낮은가격 순</a></span>
-								<span><a href="#" th:style="${'color:white'}" name="searchHighPrice" th:value="${pageVO.cri.searchHighPrice}">높은가격 순</a></span>
+								<span><a href="#" th:style="${'color:white'}" name="searchLowPrice" th:value="${pageVO.cri.searchLowPrice}">낮은가격 순</a></span>
+								<span><a href="#" th:style="${'color:white'}" name="searchHighPrice" th:value="${pageVO.cri.searchHighPrice}">높은가격 순</a></span>-->
 								
 								
 								<select class="" onchange="handleChange()">
@@ -79,12 +81,15 @@
 										<div class="showproduct">
 											
 											<ul class="imagelist">
-												<li th:each="vo, status : ${list}">
-													<img src="/img/1.jpg">
-													<p>[[${vo.product_name}]]</p>
-													<p>[[${vo.product_price}]]</p>
-													<p>[[${vo.product_soldcount}]]</p>
-													<input type="hidden" th:value="${vo.product_no}">
+												<li th:each="vo, status : ${list}" id="detailBtn">
+													<div class="detailProduct">
+														<img src="/img/1.jpg">
+														<p>[[${vo.product_name}]]</p>
+														<p>[[${vo.product_price}]]</p>
+														<p>[[${vo.product_soldcount}]]</p>
+														<input type="hidden" th:value="${vo.product_no}" >
+														<a th:href="@{/product/productDetail(product_no=${vo.product_no})}"
+													</div>
 												</li>
 											</ul>						
 										</div>
@@ -129,7 +134,11 @@
 
 
 <script th:inline="javascript">
-	
+		
+	$(".detailProduct").click(function() {
+		;
+	})
+		
 	function handleChange() {
 		document.searchForm.amount.value = event.target.value;
 		document.searchForm.submit();

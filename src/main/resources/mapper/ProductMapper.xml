@@ -7,14 +7,14 @@
 
   	<!-- 리스트목록에서 검색기능 포함 -->
   	<select id="getList" resultType="com.project.mall.command.ProductVO">
-		  select * 
-		  from product p
-		  left join (SELECT CONCAT(A1.group_ID, A1.CATEGORY_ID) AS CATEGORY_KEY, ##카테고리 키 (그룹 + 키 형태로 카테고리분류)
-	                  CASE A1.category_parent_LV
-	                     WHEN 0 THEN A1.category_detail_NM
-	                     WHEN 1 THEN CONCAT(A2.category_detail_NM,' > ', A1.category_detail_NM)
-	                     WHEN 2 THEN CONCAT(A3.category_detail_NM, ' > ', A2.category_detail_NM,' > ', A1.category_detail_NM)
-	                  END as CATEGORY_NAV
+		  SELECT * 
+		  FROM PRODUCT P
+		  LEFT JOIN (SELECT CONCAT(A1.GROUP_ID, A1.CATEGORY_ID) AS CATEGORY_KEY, ##카테고리 키 (그룹 + 키 형태로 카테고리분류)
+	                  CASE A1.CATEGORY_PARENT_LV
+	                     WHEN 0 THEN A1.CATEGORY_DETAIL_NM
+	                     WHEN 1 THEN CONCAT(A2.CATEGORY_DETAIL_NM,' > ', A1.CATEGORY_DETAIL_NM)
+	                     WHEN 2 THEN CONCAT(A3.CATEGORY_DETAIL_NM, ' > ', A2.CATEGORY_DETAIL_NM,' > ', A1.CATEGORY_DETAIL_NM)
+	                  END AS CATEGORY_NAV
 		               FROM CATEGORY A1
 		               LEFT OUTER JOIN CATEGORY A2
 		               ON A1.CATEGORY_PARENT_LV = A2.CATEGORY_LV AND A1.CATEGORY_DETAIL_PARENT_LV = A2.CATEGORY_DETAIL_LV AND A1.GROUP_ID = A2.GROUP_ID
@@ -23,40 +23,37 @@
 		               ORDER BY CATEGORY_NAV ASC
 		            ) CATEGORY_LEFT
 		  ON CATEGORY_LEFT.CATEGORY_KEY = P.CATEGORY_NO
-		  
-  		<if test="cri.searchName != '' and cri.searchName != null">
-  		and product_name like concat('%',#{cri.searchName},'%')
-  		</if>
+		  WHERE PRODUCT_NO
+		 
+  	<!-- 	<if test="cri.searchName != null and cri.searchName != ''">
+  		and product_name like concat('%', #{cri.searchName},'%')
+  		</if>  -->
   		 		
-  		<if test="cri.searchRowPrice != '' and cri.searchRowPrice != null">
-		<![CDATA[and product_price >= #{cri.searchRowPrice}]]>
+   	<!-- 	<if test="cri.searchLowPrice != '' and cri.searchLowPrice != null">
+		<![CDATA[and product_price >= #{cri.searchLowPrice}]]>
   		</if> 
   		
   		<if test="cri.searchHighPrice != '' and cri.searchHighPrice != null">
-  		<![CDATA[and product_price <= #{cri.searchHighPrice}]]>	
-  		</if>
+  		<![CDATA[and product_price <= #{cri.searchHighPrice}]]>
+  		</if>  -->
+		
   		
   		order by
-  		<!-- 낮은 가격순  -->
-  		<if test="cri.searchPrice == 'asc'">
-  			prod_price asc,
-  		</if>
   		
-  		<!-- 높은 가격순  -->
-  		<if test="cri.searchPrice == 'desc'">
-  			prod_price desc,
+  	 
+  		<if test="cri.searchLowPrice == 'asc'">
+  			product_price asc,
   		</if>
-  		
-  		<!-- 판매량 순 -->
+  		<if test="cri.searchHighPrice == 'desc'">
+  			product_price desc,
+  		</if>
   		<if test="cri.searchSold == 'desc'">
-  			prod_soldCount desc,
+  			product_soldcount desc,
   		</if>
-  		
-  		<!-- 신상품 순  -->
   		<if test="cri.searchNewItem == 'desc'">
-  			prod_regdate desc,
+  			product_regdate desc,
   		</if>
-  		
+  		 
   		
   		product_no asc
   		limit #{cri.pageStart}, #{cri.amount}
@@ -67,21 +64,43 @@
   	<select id="getTotal" resultType="int">
   		select count(*)
   		from product
+  		where product_no
   		
-  		<if test="cri.searchName != '' and cri.searchName != null">
-  		and product_name like concat('%',#{cri.searchName},'%')
-  		</if>
+	<!-- 	<if test="cri.searchName != null and cri.searchName != ''">
+  		and product_name like concat('%', #{cri.searchName},'%') 
+  		</if>  -->
   		 		
-  		<if test="cri.searchRowPrice != '' and cri.searchRowPrice != null">
-		<![CDATA[and product_price >= #{cri.searchRowPrice}]]>
+  	<!-- 	<if test="cri.searchLowPrice != '' and cri.searchLowPrice != null">
+		<![CDATA[and product_price >= #{cri.searchLowPrice}]]>
   		</if> 
   		
   		<if test="cri.searchHighPrice != '' and cri.searchHighPrice != null">
-  		<![CDATA[and product_price <= #{cri.searchHighPrice}]]>	
-  		</if>
+  		<![CDATA[and product_price <= #{cri.searchHighPrice}]]>
+  		</if> -->
+  		
   		
   		
   	
+  	</select>
+  	
+  	
+  	<select id="getDetail" resultType="ProductVO">
+  		 SELECT * FROM PRODUCT P
+		  LEFT JOIN (SELECT CONCAT(A1.GROUP_ID, A1.CATEGORY_ID) AS CATEGORY_KEY, ##카테고리 키 (그룹 + 키 형태로 카테고리분류)
+	                  CASE A1.CATEGORY_PARENT_LV
+	                     WHEN 0 THEN A1.CATEGORY_DETAIL_NM
+	                     WHEN 1 THEN CONCAT(A2.CATEGORY_DETAIL_NM,' > ', A1.CATEGORY_DETAIL_NM)
+	                     WHEN 2 THEN CONCAT(A3.CATEGORY_DETAIL_NM, ' > ', A2.CATEGORY_DETAIL_NM,' > ', A1.CATEGORY_DETAIL_NM)
+	                  END AS CATEGORY_NAV
+		               FROM CATEGORY A1
+		               LEFT OUTER JOIN CATEGORY A2
+		               ON A1.CATEGORY_PARENT_LV = A2.CATEGORY_LV AND A1.CATEGORY_DETAIL_PARENT_LV = A2.CATEGORY_DETAIL_LV AND A1.GROUP_ID = A2.GROUP_ID
+		               LEFT OUTER JOIN CATEGORY A3
+		               ON A2.CATEGORY_PARENT_LV = A3.CATEGORY_LV AND A2.CATEGORY_DETAIL_PARENT_LV = A3.CATEGORY_DETAIL_LV
+		               ORDER BY CATEGORY_NAV ASC
+		            ) CATEGORY_LEFT
+		  ON CATEGORY_LEFT.CATEGORY_KEY = P.CATEGORY_NO
+		where product_no = #{product_no}
   	</select>
   	
   	
