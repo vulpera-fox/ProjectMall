@@ -1,114 +1,79 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
+<th:block th:fragment="layout(content)">
 
-<th:block th:fragment="setContent(content)">
-
-<head>
-
-	<meta charset="UTF-8" />
-	<meta charset="EUC-KR" />
-
-    <!--공통 -->
-	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/productDetail.css}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/loading.css}" />  
-	<link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.min.css}" />
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
-		integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-	<script th:src="@{/js/jquery-1.12.1.min.js}"></script>
-	<script th:src="@{/js/jquery-ui.min.js}"></script>
-	<script th:src="@{/js/style.js}"></script>
-
-	<!--개인 -->
-	<link rel="stylesheet" type="text/css" th:href="@{/css/modal.css}" />
-	<!--<script th:src="@{js/modal.js}"></script>-->
-
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<link rel="stylesheet" href="../css/layout.css">
+		<script src="../js/adminMain.js"></script>
+		<script src="../js/jquery-3.7.0.min.js"></script>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+	</head>
 	
-	<!-- 좌측 사이드바 -->
-    <aside>
-        <span class="menuBtn">EXPLORE</span>
-        <ul class="sidenav" th:style="${'width:100px'}">
-            <li class="sub_menu_toggle">
-                <a href="#">TOP</a>
-                <ul class="sub_menu">
-                    <li><a href="#"></a></li>
-                    <li><a href="#">-상품조회 / 수정</a></li>
-                    <li><a href="#">-하단메뉴</a></li>
-                </ul>
-            </li>
-            <li class="sub_menu_toggle">
-                <a href="#">BOTTOM</a>
-                <ul class="sub_menu">
-                    <li><a href="#">-전체 글목록</a></li>
-                    <li><a href="#">-글 등록</a></li>
-                    <li><a href="#">-내글 목록</a></li>
-                </ul>
-            </li>
-            <li class="sub_menu_toggle">
-                <a href="#">OUTER</a>
-                <ul class="sub_menu">
-                    <li><a href="#">-판매자공지목록</a></li>
-                    <li><a href="#">-판매자공지등록</a></li>
-                    <li><a href="#">-판매자공지보기</a></li>
-                </ul>
-            </li>
-            <li class="sub_menu_toggle">
-                <a href="#">ACC</a>
-                <ul class="sub_menu">
-                    <li><a href="#">-예시메뉴</a></li>
-					<li><a href="#">-예시메뉴</a></li>
-					<li><a href="#">-예시메뉴</a></li>
-                </ul>
-            </li>
-        </ul>
-    </aside>
 	
-	<div th:replace="${content}">
 
-	</div>
-	
-		<footer id="footer">
-		
-		<div class="footer_wrap2">
-				<div class="footer_bot">
-						<!-- 하위 -->
-		
-						<ul class="fl_left">
-								<li><a href="#">이용약관</a></li>
-								<li><a href="#">위치기반서비스 이용약관</a></li>
-								<li><a href="#">개인정보처리방침</a></li>
-								<li><a href="#">청소년보호정책</a></li>
-								<li><a href="#">제휴/프로모션문의</a></li>
-								<li><a href="#">이메일주소무단수집거부</a></li>
-								<li><a href="#">파트너센터</a></li>
-						</ul>
-						<p>
-								<strong>(주)TI</strong>
-								<span>주소 : 강남중앙정보학원 4실습실</span>
-								<span>대표이사 : 유안김</span>
-								<span>사업자등록번호 : 비밀</span>
-								<span>통신판매업신고번호 : 2023-서울강남-0807</span>
-								<span>사업자정보확인</span>
-								<br />
-								<span>문의전화 : 02-2023-0807 (평일 09:00-18:00)</span>
-								<span>이메일 : yopy0817@gmail.com</span>
-								<span>호스팅서비스사업자 : (주)AWS</span>
-								<span>© Coding404 Entertainment Corp.</span>
-						</p>
-		
+	<body>
+
+		<header id="header">
+			<div class="headerLeft">
+				<a class="logo"><span>MUSINSA</span></a>
+				<div class="searchZone">
+					<form id="searchForm" action="searchForm" method="get">
+						<input type="text">
+						<span class="search_btn">Q</span>
+					</form>
 				</div>
-		</div>
-	</footer>
+			</div>
+			<div class="headerRight">
+				<div class="shortcut">
+					<li>
+						<ul><a>클리어런스</a></ul>
+						<ul><a>무제한쿠폰</a></ul>
+						<ul><a>브랜드위크</a></ul>
+						<ul><a>랭킹</a></ul>
+						<ul><a>업데이트</a></ul>
+						<ul><a>코디</a></ul>
+						<ul><a>세일</a></ul>
+						<ul><a>스페셜</a></ul>
+						<ul><a>매거진</a></ul>
+					</li>
+				</div>
+			</div>
 
-	
-	
-	
-</body>
-</th:block>>
+		</header>
+
+		<aside id="aside">
+			<div>
+
+			</div>
+
+
+
+		</aside>
+
+		<div th:replace="${content}">
+
+		</div>
+
+
+		<div id="footer">
+			<footer>
+				<div class="footerContent">
+					<p>여기는푸터</p>
+				</div>
+			</footer>
+
+		</div>
+
+
+	</body>
+
+</th:block>
+
 
 </html>
