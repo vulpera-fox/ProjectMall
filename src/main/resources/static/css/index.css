@@ -708,3 +708,5 @@ a.sub_menu_select {color: #f1f1f1; background-color: #00acac;}
 .imagelist li:last-child {
     margin-right: 0;
 }
+
+.form_wrap {width:100%;}

@@ -36,15 +36,15 @@
   			product_price asc,
   		</if> 
  
- 		<if test="searchPrice == 'desc'">
+ 		<if test="searchPrice == 'desc1'">
   			product_price desc,
   		</if>
   		  		
-  		<if test="searchSold == 'desc'">
+  		<if test="searchPrice == 'desc2'">
   			product_soldcount desc,
   		</if>
-
-  		<if test="searchNewItem == 'desc'">
+  		
+  		<if test="searchPrice == 'desc3'">
   			product_regdate desc,
   		</if>
          
