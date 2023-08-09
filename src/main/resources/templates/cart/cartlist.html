@@ -4,43 +4,144 @@
     <meta charset="UTF-8">
     <title>장바구니</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
-    <style>
+      <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e5e5e5;
+        }
+
         table {
+            background-color: #fff;
             width: 80%;
             border-collapse: collapse;
-            margin: 20px auto;
+            margin: 0 auto;
+            border: 1px solid #e5e5e5;
         }
+
         th, td {
-            border: 1px solid black;
-            padding: 8px 12px;
+            border: 1px solid #e5e5e5;
+            padding: 15px;
             text-align: center;
         }
+
+        td {
+            background-color: #fafafa;
+        }
+
+        tbody tr:hover {
+            background-color: #f0f0f0;
+        }
+
+        .cart-box {
+			display: flex;
+        	justify-content: space-between;
+        	align-items: center;
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 15px;
+            border: 1px solid #e5e5e5;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #e5e5e5;
+            border-radius: 5px;
+        }
+
+        input[type="text"]:read-only {
+            background-color: #e9e9e9;
+        }
+		
+		.cart-total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #5c6bc0;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #49599a;
+    }
     </style>
 </head>
 <body>
-
+<th:block th:replace="~{/layout/layout :: layout( ~{:: .wrap})}">
+	<div class="wrap">
 <h2 style="text-align:center;">장바구니</h2>
 
 <table>
     <thead>
         <!-- ... -->
     </thead>
-    <div id="userId" th:text="${session.userVO.userId}" style="display: none;"></div>
-    <tbody th:each="vo : ${list}">
-    <tr>
-        <td th:text="${vo.product_name}"></td>
-        <td><input type="number" class="test" th:value="${vo.boxcount}" onchange="calculateTotalPrice()"></td>
-        <td><input type="text" th:value="${vo.product_price}" readonly></td>   
-    </tr>
-	</tbody>
-	
-</table>
-<div>
-	<input id="totalPrice" type="text" value="">
-    
-</div>
+    <div class="cart-box">
+		<div id="userId" th:text="${session.userVO.userId}" style="display: none;"></div>
+		
+		    <tbody th:each="vo : ${list}">
+				
+		    <tr>
+				<!--boxnumber boxcount product_no user_id category_id product_name product_price -->
+				<!--세션정보 -->
+				<!--들어가는 데이터 -->
+				<!--ordernumber(자동),product_no(hidden추가),user_id(세션),boxnumber(카트에서자동증가)
+				,category_id(vo.category_no hidden),paymentmethod(option만들기) -->
+				<!--ordername(세션), orderaddress(세션), orderphone(세션), orderdetailaddress(만들기), 
+				ordermemo(만들기) -->
+				<!--orderdate(자동),product_name(있음), pay_price(총가격)  -->
+		        <td th:text="${vo.product_name}"></td>
+		        <td>이미지</td>
+		        <td><input type="number" class="test" th:value="${vo.boxcount}" onchange="calculateTotalPrice()"></td>
+		        <td><input type="text" th:value="${vo.product_price}" readonly></td>
+		    </tr>
+		    </tbody>	
+		</table>
+				<div class="cart-box">
+		    <div class="cart-total">
+		        <div>총 상품 금액: <input id="totalPrice" type="text" value=""></div>
+		        <form action="#" method="post">
+					<input type="text" name="product_no" > 
+					<input type="text" name="user_id"> 
+					<input type="text" name="boxnumber"> 
+					<input type="text" name="category_id"> 
+					<input type="text" name="paymentmethod"> 
+					<input type="text" name="ordername"> 
+					<input type="text" name="orderaddress"> 
+					<input type="text" name="orderphone"> 
+					<input type="text" name="orderdetailaddress"> 
+					<input type="text" name="ordermemo"> 
+					<input type="text" name="orderdate"> 
+					<input type="text" name="product_name"> 
+					<input type="text" name="pay_price"> 
+		        	<button>구매하기</button>
+				</form>
+		    </div>
+		</div>
+    </div>
 
 </body>
+</div>
 <script>
 function calculateTotalPrice() {
         let total = 0;
