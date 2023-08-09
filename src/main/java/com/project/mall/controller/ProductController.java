@@ -25,11 +25,11 @@ public class ProductController {
 
 	private ProductService productService;
 	
+
+
 	@GetMapping("/productpage")
 	public String productpage(ProductVO vo, Criteria cri, Model model ) {
 		
-
-
 		ArrayList<ProductVO> list = productService.getList(cri);
 		int total = productService.getTotal(cri);
 		PageVO pageVO = new PageVO(cri, total);
