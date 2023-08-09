@@ -10,12 +10,12 @@ public class Criteria {
 	private int amount; // 데이터 갯수
 	
 	//검색에 필요한 키워드를 선언
-//	private String searchName;
-//	private String searchLowPrice;
-//	private String searchHighPrice;
-//	private String searchPrice;
-//	private String searchSold;
-//	private String searchNewItem;
+	private String searchName;
+	private String searchLowPrice;
+	private String searchHighPrice;
+	private String searchPrice;
+	private String searchSold;
+	private String searchNewItem;
 	
 	//기본 생성자로 만들어지면 1, 10 기본값
 	public Criteria() {

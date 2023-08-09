@@ -23,7 +23,8 @@
             <div class="midiaq">
                <div class="page_title">TI</div>
 
-               
+               <form name="searchForm1" action="productpage" method="get" >
+				   
                <input type="hidden" name="page" value="1">   
                <input type="hidden" name="amount" th:value="${pageVO.amount}">   
                <div class="search_block flfull">
@@ -31,23 +32,18 @@
                   <div class="fl">
                      <div>
                         <span class="search_th">상품이름 검색</span>
-                        <input type="text" class="" placeholder="상품 검색" name="searchName" >
+                        <input type="text" class="" placeholder="상품 검색" name="searchName" th:value="${pageVO.cri.searchName}">
                      
                      </div>
-                     
-                     <!--<div>
-                        <span class="search_th"> 검색</span>
-                        <input type="text" class="" placeholder="상품 검색">
-                     </div>-->
-                     
+    
                      <div>
-                        <span class="search_th">판매가 정렬</span>
-                        <select class="" name="">
+                      <span class="search_th">판매가 정렬</span>
+                        <select class="" name="searchPrice">
                            <option value="none" >정렬방식</option>
-                           <option value="asc" name="searchLowPrice" >가격 낮은순</option>
-                           <option value="desc" name="searchHighPrice" >가격 높은순</option>
-                           <option value="desc" name="searchSold" >판매량 순</option>
-                           <option value="desc" name="searchNewItem" >신상품 순</option>
+                           <option value="asc" name="searchPrice" th:selected="${pageVO.cri.searchPrice == 'asc'}">가격 낮은순</option>
+                           <option value="desc" name="searchPrice" th:selected="${pageVO.cri.searchPrice == 'desc'}">가격 높은순</option>
+                           <option value="desc" name="searchSold" th:selected="${pageVO.cri.searchSold == 'desc'}">판매량 순</option>
+                           <option value="desc" name="searchNewItem" th:selected="${pageVO.cri.searchNewItem == 'desc'}">신상품 순</option>
 
                         </select>
                      </div>
@@ -55,11 +51,12 @@
 
                   <div class="fr">
                      <div class="search_btn_area">
-                        <a href="#" class="normal_btn purplebtn" id="searchBtn">검색</a>
+                        <a href="#" class="normal_btn purplebtn" id="searchBtn" >검색</a>
                      </div>
                   </div>
                </div>
-
+				</form>
+				
                <div class="full_collum collum">
                   <ul>
                                  
@@ -144,9 +141,9 @@
     }
 
     var searchBtn = document.getElementById("searchBtn");
-    searchBtn.onclick = function(event) {
+    searchBtn.onclick = function() {
         event.preventDefault(); // Prevent the default action
-        document.searchForm.submit();
+        document.searchForm1.submit();
     }
 </script>
 </body>

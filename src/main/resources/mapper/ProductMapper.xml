@@ -25,8 +25,30 @@
         ON CATEGORY_LEFT.CATEGORY_KEY = P.CATEGORY_NO
         WHERE PRODUCT_NO
 
-        ORDER BY
-                 
+		<if test="searchName != null and searchName != ''">
+  		and product_name like concat('%', #{searchName},'%')
+  		</if>
+
+
+        ORDER BY 
+         
+        <if test="searchPrice == 'asc'">
+  			product_price asc,
+  		</if> 
+ 
+ 		<if test="searchPrice == 'desc'">
+  			product_price desc,
+  		</if>
+  		  		
+  		<if test="searchSold == 'desc'">
+  			product_soldcount desc,
+  		</if>
+
+  		<if test="searchNewItem == 'desc'">
+  			product_regdate desc,
+  		</if>
+         
+        
         PRODUCT_NO ASC
         LIMIT #{pageStart}, #{amount}
      
@@ -37,6 +59,11 @@
      <select id="getTotal" resultType="int">
         select count(*)
         from product
+        where product_no
+        
+        <if test="searchName != null and searchName != ''">
+  		and product_name like concat('%', #{searchName},'%')
+  		</if>
              
      </select>
      
