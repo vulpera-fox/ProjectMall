@@ -49,8 +49,16 @@
                                     </tr>
 							</table>
 							<div>
-							<input type="button" value="구매" id="buyBtn">
-                    		<input type="button" value="장바구니" id="cartBtn">
+							<button><a th:href="@{/order/order(product_no=${vo.product_no})}">바로구매</a></button>
+                    			<form action="/cart/getUserCartList" method="post">
+	                              <input type="hidden" name="product_no" th:value="${vo.product_no}">
+	                              <input type="hidden" name="boxcount" value="1">
+	                              <input type="hidden" name="product_price" th:value="${vo.product_price}">
+	                              <input type="hidden" name="user_id" th:value="${session.userVO.userId}">
+	                              <input type="hidden" name="category_id" th:value="${vo.category_no}">
+	                              <input type="hidden" name="product_name" th:value="${vo.product_name}">
+	                              <button type="submit">장바구니 추가</button>
+	                          </form>
 							</div>
                     	</div>
 				</div>
