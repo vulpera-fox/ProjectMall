@@ -137,7 +137,7 @@
 					<input type="radio" name="1" style="display: inline-block;" >카드
 					<input type="radio" name="1" style="display: inline-block;">현금
 				</div>	
-		        	<button style="width: 100px; height: 30px; background-color: black; color: white;" >구매하기</button>
+		        	<button class="buyBTN" style="width: 100px; height: 30px; background-color: black; color: white;" >구매하기</button>
 		    </div>
 		</div>
     </div>
@@ -146,7 +146,7 @@
 </div>
 <script>
 	
-	document.querySelector('button').addEventListener('click',handleSubmit);
+	document.querySelector('.buyBTN').addEventListener('click',handleSubmit);
 	
 	function handleSubmit(event) {
 		event.preventDefault();
@@ -172,7 +172,7 @@
                 	ordername: row.querySelector("input[name='ordername']").value,
                 	orderaddress: row.querySelector("input[name='orderaddress']").value,
                 	orderphone: row.querySelector("input[name='orderphone']").value,
-                	product_name: productName,
+                	product_name: row.querySelector("input[name='product_name']").value,
                 	pay_price: price
 				});
 			}

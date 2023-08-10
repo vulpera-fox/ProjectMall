@@ -30,26 +30,26 @@
   		</if>
 
 
-        ORDER BY 
+        ORDER BY PRODUCT_NO ASC
          
         <if test="searchPrice == 'asc'">
-  			product_price asc,
+  			, product_price asc
   		</if> 
  
  		<if test="searchPrice == 'desc1'">
-  			product_price desc,
+  			, product_price desc
   		</if>
   		  		
   		<if test="searchPrice == 'desc2'">
-  			product_soldcount desc,
+  			, product_soldcount desc
   		</if>
   		
   		<if test="searchPrice == 'desc3'">
-  			product_regdate desc,
+  			, product_regdate desc
   		</if>
          
         
-        PRODUCT_NO ASC
+        
         LIMIT #{pageStart}, #{amount}
      
      </select>

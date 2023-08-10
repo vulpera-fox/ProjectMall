@@ -27,20 +27,18 @@
 			<div class="headerLeft">
 				<a class="logo" th:href="@{/product/productpage}" style="color: white;"><span>MUSINSA</span></a>
 				<div class="searchZone">
-					<form id="searchForm" action="./adminMain" method="get">
+					<form id="searchForm" action="adminMain" method="get">
 						<input type="text" name="product_name">
 						<button type="submit"><span class="search_btn">Q</span></button>
-						<a th:href="@{adminMain}" style="border: 1px solid white; width: 40px; height: 40px; margin-left: 10px; background-color: white; line-height: 25px;"><span style="font-size: 12px;">초기화</span></a>
+						<th:block th:if="${session.userVO.userGrade == '관리자'}">
+							<a th:href="@{/admin/adminMain}" style="border: 1px solid white; width: 100px; height: 40px; margin-left: 10px; background-color: white; line-height: 25px; text-align: center;"><span style="font-size: 12px;">관리자페이지</span></a>
+						</th:block>
 					</form>
 				</div>
 			</div>
 			<div class="headerRight">
 				<div class="shortcut">
 					<ul>
-						<li><a>상의</a></li>
-						<li><a>하의</a></li>
-						<li><a>아우터</a></li>
-						<li><a>액세서리</a></li>
 						<th:block th:if="${session.userVO != null}">
 							<li style="margin-left: 100px;"><a th:href="@{../user/mypage}" style="text-decoration: none; color: white;">[[${session.userVO.userId}]]님 접속중</a></li>
 						</th:block>

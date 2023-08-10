@@ -3,6 +3,8 @@ package com.project.mall.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.project.mall.admin.service.AdminService;
 import com.project.mall.command.ProductImageVO;
 import com.project.mall.command.ProductVO;
+import com.project.mall.command.UserVO;
 import com.project.mall.product.service.ProductService;
 import com.project.mall.util.page.Criteria;
 import com.project.mall.util.page.PageVO;
@@ -55,9 +58,14 @@ public class ProductController {
 	
 	@RequestMapping("/productDetail")
 	public String productDetail(@RequestParam("product_no") int product_no
-										   	  , Model model) {
+										   	  , Model model,
+										   	  HttpSession session) {
+		UserVO uservo = (UserVO)session.getAttribute("userVO");
 		ProductVO vo = productService.getDetail(product_no);
+		ProductImageVO imagevo = adminService.getProductImage(vo);
+		
 		model.addAttribute("vo", vo);
+		model.addAttribute("imagevo", imagevo);
 	
 		return "product/productDetail";
 	}
