@@ -64,7 +64,7 @@
                         <span><a href="#" th:style="${'color:white'}" name="searchLowPrice" th:value="${pageVO.cri.searchLowPrice}">낮은가격 순</a></span>
                         <span><a href="#" th:style="${'color:white'}" name="searchHighPrice" th:value="${pageVO.cri.searchHighPrice}">높은가격 순</a></span>-->
                         
-                        <form name="searchForm" action="productpage" method="get" >
+                        <form name="searchForm" action="productpage" method="get">
                
                         <select class="" name="amount" onchange="handleChange()">
                            <option value="20" th:selected="${pageVO.amount == 20}">20개 보기</option>
@@ -83,7 +83,11 @@
                                     <a th:href="@{/product/productDetail(product_no=${vo.product_no})}">
                                     <li>
                                        <div class="detailProduct">
-                                          <img src="/img/1.jpg">
+										  <th:block th:each="imagevo : ${imageList}">
+											  <th:block th:if="${imagevo.product_no == vo.product_no}">
+                                        		  <img th:src="@{../display(filePath=${imagevo.filePath}, fileName=${imagevo.fileName}, uuid=${imagevo.uuid})}">
+											  </th:block>
+										  </th:block>
                                           <p>[[${vo.product_name}]]</p>
                                           <p>[[${vo.product_price}]]</p>
                                           <p>[[${vo.product_soldcount}]]</p>

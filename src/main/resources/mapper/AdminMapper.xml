@@ -14,13 +14,13 @@
  	        WHEN 0 THEN A1.category_detail_NM
  			WHEN 1 THEN CONCAT(A2.category_detail_NM,' > ', A1.category_detail_NM)
  			WHEN 2 THEN CONCAT(A3.category_detail_NM, ' > ', A2.category_detail_NM,' > ', A1.category_detail_NM)
- 	    END as CATEGORY_NAV
+ 	    END as category_nav
 		FROM category A1
 		LEFT OUTER JOIN category A2
 		ON A1.CATEGORY_PARENT_LV = A2.CATEGORY_LV AND A1.CATEGORY_DETAIL_PARENT_LV = A2.CATEGORY_DETAIL_LV AND A1.GROUP_ID = A2.GROUP_ID
 		LEFT OUTER JOIN category A3
 		ON A2.CATEGORY_PARENT_LV = A3.CATEGORY_LV AND A2.CATEGORY_DETAIL_PARENT_LV = A3.CATEGORY_DETAIL_LV
-		ORDER BY CATEGORY_NAV ASC
+		ORDER BY category_nav ASC
   		
   		) b
   		
@@ -38,13 +38,13 @@
  	        WHEN 0 THEN A1.category_detail_NM
  			WHEN 1 THEN CONCAT(A2.category_detail_NM,' > ', A1.category_detail_NM)
  			WHEN 2 THEN CONCAT(A3.category_detail_NM, ' > ', A2.category_detail_NM,' > ', A1.category_detail_NM)
- 	    END as CATEGORY_NAV
+ 	    END as category_nav
 		FROM category A1
 		LEFT OUTER JOIN category A2
 		ON A1.CATEGORY_PARENT_LV = A2.CATEGORY_LV AND A1.CATEGORY_DETAIL_PARENT_LV = A2.CATEGORY_DETAIL_LV AND A1.GROUP_ID = A2.GROUP_ID
 		LEFT OUTER JOIN category A3
 		ON A2.CATEGORY_PARENT_LV = A3.CATEGORY_LV AND A2.CATEGORY_DETAIL_PARENT_LV = A3.CATEGORY_DETAIL_LV
-		ORDER BY CATEGORY_NAV ASC
+		ORDER BY category_nav ASC
   		
   		) b
   		
